@@ -3,21 +3,21 @@ package com.goat.controller;
 
 import com.goat.dto.CreateCareerRequest;
 import com.goat.model.Career;
+import com.goat.repository.CareerRepository;
 import com.goat.service.CareerService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController  // indica que esta clase maneja peticiones HTTP - endpoint
 @RequestMapping("/api/careers") //  las rutas empiezan por "/api/careers"
 public class CareerController {
 
     private final CareerService careerService;
+    private final CareerRepository careerRepository;
 
     // Inyectamos el service para poder usarlo despues
-    public CareerController(CareerService careerService){
+    public CareerController(CareerService careerService, CareerRepository careerRepository){
         this.careerService = careerService;
+        this.careerRepository = careerRepository;
     }
 
     @PostMapping // Cuando haya un POST a /api/career se ejecuta este metodo, como no se define ruta se usa la generiuca de @RequestMapping
@@ -29,7 +29,12 @@ public class CareerController {
         );
     }
 
-
+    // LLevar info de la carrera al front
+    @GetMapping("/{id}")
+    public Career getCareer(@PathVariable Long id) {
+        return careerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Carrera no encontrada"));
+    }
 
 
 
