@@ -31,7 +31,7 @@ public class GameService {
         Career career = careerRepository.findById(careerId).orElseThrow(()-> new RuntimeException("Carrera no encontrada"));
 
         // retorna 3 eventos
-        return eventService.getRandomEvents(careerId,3);
+        return eventService.getRandomEvents(careerId,5);
 
         // FUTURO
 //        if (career.getCurrentTeam() == null) {

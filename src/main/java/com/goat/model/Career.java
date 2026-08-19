@@ -83,7 +83,7 @@ public class Career {
     private List<Competitor> competitors;
 
     // ROL
-    @Column(length = 20)
+    @Column(name="player_role", length = 20)
     private String currentRole = "Cantera";
 
     private Integer contractYearsLeft = 0;

@@ -1,6 +1,7 @@
 package com.goat.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,5 +46,6 @@ public class EventOption {
     
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
+    @JsonIgnore // Para que no inclkuya el event padre en el JSON que devuelve
     private Event event;
 }
