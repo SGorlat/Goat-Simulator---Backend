@@ -41,10 +41,11 @@ public List<TransferOffer> generateOffer(Long careerId){
     // Buscamos temporada
     List<CareerSeason> seasons = careerSeasonRepository.findByCareerIdOrderBySeasonNumberAsc(careerId);
 
-
+    int lvlOffer = 0;
     if (seasons.isEmpty()) {
-        return new ArrayList<>();  // sin temporadas aun, no hay ofertas, array vacio
-    }
+        lvlOffer = 1;  // sin temporadas aun, estamos en academia, ofertas lvl1
+    }else{
+
 
     CareerSeason lastSeason = seasons.getLast(); // seasons.get(seasons.size() - 1);
 
@@ -53,7 +54,7 @@ public List<TransferOffer> generateOffer(Long careerId){
     double rating = lastSeason.getSeasonRating();
     int reputation = career.getReputation();
 
-    int lvlOffer = 0;
+
 
     if(rating > 8 && reputation > 70){
         // club de nivel 3 (élite)
@@ -63,15 +64,17 @@ public List<TransferOffer> generateOffer(Long careerId){
         lvlOffer = 2;
     }else{
         lvlOffer = 1;
+     }
     }
 
     // Buscar equipo del lvl correspondiente - lista de equipos disponibles
 
     List<Team> teams = teamRepository.findByLeagueLevel(lvlOffer);
 
-        // Eliminamos mi equipo actual de la lista, elimiando aquellois cuyo id sea = al id de mi equipo actual
-
+        // Si tengo equipo: Eliminamos mi equipo actual de la lista, elimiando aquellos cuyo id sea = al id de mi equipo actual
+    if(career.getCurrentTeam() != null){
         teams.removeIf(t -> t.getId().equals(career.getCurrentTeam().getId()));
+    }
 
     // Elegir 3 aleatorios
 

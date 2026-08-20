@@ -31,7 +31,14 @@ public class SimulationEngine {
     // Calcular goles de la temporada
     private int calculateGoals(Career career) {
 
+
         Random randomNum = new Random();
+
+
+        if(career.getCurrentTeam() == null){
+            double base = ((career.getFinishing())*0.3+ (career.getSpeed() * 0.2) / 10);
+            return (int) base + randomNum.nextInt(3);
+        }
 
         double base = ((career.getFinishing() * 0.4) + (career.getSpeed() * 0.2) + (career.getTechnique() * 0.3)) / 10;
         double positionFactor = 1.0; // por defecto
@@ -72,6 +79,11 @@ public class SimulationEngine {
     private int calculateAssists(Career career) {
 
         Random randomNum = new Random();
+        
+        if (career.getCurrentTeam() == null) {
+            double base = (career.getVision() * 0.2 + career.getTechnique() * 0.1) / 10;
+            return (int) base + randomNum.nextInt(2);
+        }
 
         double base = (career.getVision() * 0.4 + career.getTechnique() * 0.3 + career.getSpeed() * 0.1) / 10;
         double positionFactor = 1.0; // por defecto
@@ -111,6 +123,11 @@ public class SimulationEngine {
     // Calcular puesto en liga en base al equipo y la contribucion goles/asist
     private int calculateLeaguePosition(Career career, int goals, int assist) {
         Random randomNum = new Random();
+
+        if (career.getCurrentTeam() == null) {
+            return new Random().nextInt(10) + 1;  // posición aleatoria en la cantera
+        }
+
         int prestigeTeam = career.getCurrentTeam().getPrestige();
 
         int randomFactor = randomNum.nextInt(21) - 10;
