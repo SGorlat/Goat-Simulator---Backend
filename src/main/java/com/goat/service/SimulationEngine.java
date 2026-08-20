@@ -36,7 +36,7 @@ public class SimulationEngine {
 
 
         if(career.getCurrentTeam() == null){
-            double base = ((career.getFinishing())*0.3+ (career.getSpeed() * 0.2) / 10);
+            double base = ((career.getFinishing())*0.3+ (career.getSpeed() * 0.2) / 5);
             return (int) base + randomNum.nextInt(3);
         }
 
@@ -79,9 +79,9 @@ public class SimulationEngine {
     private int calculateAssists(Career career) {
 
         Random randomNum = new Random();
-        
+
         if (career.getCurrentTeam() == null) {
-            double base = (career.getVision() * 0.2 + career.getTechnique() * 0.1) / 10;
+            double base = (career.getVision() * 0.2 + career.getTechnique() * 0.1) / 6;
             return (int) base + randomNum.nextInt(2);
         }
 
@@ -182,8 +182,8 @@ public class SimulationEngine {
             }
 
             // Goles/asist que marcan en base a su stats + aleat
-            comp.setSeasonGoals((int) (comp.getFinishing() * 0.3 + randomNum.nextInt(5)));
-            comp.setSeasonAssists((int) (comp.getVision() * 0.2 + randomNum.nextInt(3)));
+            comp.setSeasonGoals((int) (comp.getFinishing() * 0.15 + randomNum.nextInt(5)));
+            comp.setSeasonAssists((int) (comp.getVision() * 0.1 + randomNum.nextInt(3)));
 
 
             // Subir +1 edad
@@ -250,31 +250,38 @@ public class SimulationEngine {
 
 
         if (career.getCurrentAge() <= 21) {
-            // Media de stats
-            int myOverallRating = (career.getFinishing() + career.getSpeed() + career.getTechnique() + career.getVision() + career.getMental() + career.getPhysical()) / 6;
 
-            String bestYoung = "";
-            int betterYoungThanMe = 0;
+            // Mínimo para optar: al menos 5 goles o 3 asistencias
+            if (goals + assists < 10) {
+                // No opta — rendimiento insuficiente
+            } else {
 
-            for (Competitor comp : competitors) {
-                if (comp.getAge() <= 21) {
-                    int overallRatingComp = (comp.getTechnique() + comp.getFinishing() + comp.getSpeed() + comp.getMental() + comp.getVision() + comp.getPhysical()) / 6;
-                    if (overallRatingComp > myOverallRating) {
-                        bestYoung = comp.getName();
-                        betterYoungThanMe++;
+                // Media de stats
+                int myOverallRating = (career.getFinishing() + career.getSpeed() + career.getTechnique() + career.getVision() + career.getMental() + career.getPhysical()) / 6;
+
+                String bestYoung = "";
+                int betterYoungThanMe = 0;
+
+                for (Competitor comp : competitors) {
+                    if (comp.getAge() <= 21) {
+                        int overallRatingComp = (comp.getTechnique() + comp.getFinishing() + comp.getSpeed() + comp.getMental() + comp.getVision() + comp.getPhysical()) / 6;
+                        if (overallRatingComp > myOverallRating) {
+                            bestYoung = comp.getName();
+                            betterYoungThanMe++;
+                        }
                     }
                 }
+
+                if (betterYoungThanMe == 0) {
+                    awards.add("Trofeo KOPA -  ¡Mejor jugador joven del mundo!");
+                } else if (betterYoungThanMe == 1) {
+                    awards.add("Has quedado 2º en el trofeo KOPA (ganó '" + bestYoung + "')");
+                } else if (betterYoungThanMe == 2) {
+                    awards.add("Has quedado 3º en el trofeo KOPA (ganó '" + bestYoung + "')");
+
+                }
+
             }
-
-            if (betterYoungThanMe == 0) {
-                awards.add("Trofeo KOPA -  ¡Mejor jugador joven del mundo!");
-            } else if (betterYoungThanMe == 1) {
-                awards.add("Has quedado 2º en el trofeo KOPA (ganó '" + bestYoung + "')");
-            } else if (betterYoungThanMe == 2) {
-                awards.add("Has quedado 3º en el trofeo KOPA (ganó '" + bestYoung + "')");
-
-            }
-
         }
 
         // BALÓN DE ORO — solo liga nivel 3 + reputation > 60
@@ -417,6 +424,8 @@ public class SimulationEngine {
 
             // Guardamos temporada actual
             careerSeasonRepository.save(careerSeason);
+
+            career.setSavings(career.getSavings() + career.getSalary());
 
             // Guardamos carrera actualizada con 1 temp +
             careerRepository.save(career);

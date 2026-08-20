@@ -840,7 +840,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d001 = footballDataService.createEvent(
                     "Llevas cinco partidos marcando",
                     "Cinco partidos, cinco goles. Los periódicos ya hablan de racha histórica. El míster te llama aparte: 'No cambies nada. Ni la dieta, ni las botas, ni la forma de atarte los cordones. Lo que estés haciendo, sigue.'",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d001,
                     "Mantener la calma y seguir con tu rutina",
@@ -855,7 +855,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d002 = footballDataService.createEvent(
                     "Ocho partidos sin ver portería",
                     "Ocho partidos. Cero goles. Cero asistencias. La grada ya murmura. El míster te mantiene pero en rueda de prensa le preguntan si va a sentarte. Su respuesta: 'Confío en él. Pero la confianza no es infinita.'",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d002,
                     "Quedarte a entrenar tiros después de cada sesión",
@@ -874,7 +874,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d003 = footballDataService.createEvent(
                     "Día de derbi",
                     "El vestuario vibra. El capitán no necesita dar charla porque la tensión se corta con un cuchillo. Los ultras llevan cantando desde las siete de la mañana. El árbitro pita y el campo ruge. ¿Cómo entras?",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d003,
                     "Enchufado desde el primer minuto, sin dar una por perdida",
@@ -889,7 +889,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d004 = footballDataService.createEvent(
                     "Roja directa",
                     "El árbitro pita una falta absurda en contra tuya. Se te va la boca. Dos palabras de más. Roja directa. El vestuario se queda en silencio cuando entras. El míster ni te mira.",
-                    "deportivo", "informativo", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "informativo", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d004,
                     "Pedir disculpas al míster y al equipo",
@@ -904,7 +904,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d005 = footballDataService.createEvent(
                     "¡GOOOL! El primero con esta camiseta",
                     "Centro desde la banda, el balón te llega solo, enganchas de primeras y la red se mueve. Lo siguiente que recuerdas es a cinco compañeros encima tuyo gritándote al oído. El estadio corea tu nombre por primera vez.",
-                    "deportivo", "informativo", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "informativo", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d005,
                     "Celebrarlo con la grada",
@@ -919,7 +919,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d006 = footballDataService.createEvent(
                     "Hoy empiezas en el banquillo",
                     "El once sale del vestuario y tú no estás. Te sientas en el banquillo con el chándal puesto. En el minuto 60, con el partido 0-0, el míster te mira: 'Calienta. Tienes media hora para convencerme.'",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d006,
                     "Salir a comerte el mundo en 30 minutos",
@@ -934,7 +934,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d007 = footballDataService.createEvent(
                     "Un golpe en la rodilla",
                     "Minuto 35. Choque con un defensa. Te duele la rodilla. El fisio entra al campo, te la palpa y dice: 'Puedes seguir, pero si te la vuelven a dar, podrías estar un mes fuera.' Quedan 55 minutos.",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d007,
                     "Seguir jugando y arriesgarte",
@@ -949,7 +949,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d008 = footballDataService.createEvent(
                     "Llevas dos goles y queda media hora",
                     "Dos goles en 60 minutos. La grada ya grita tu nombre. El hat-trick está ahí. El míster te mira desde la banda pero no te cambia. El capitán te pasa el balón cada vez que puede.",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d008,
                     "Ir a por el tercero con todo",
@@ -964,7 +964,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d009 = footballDataService.createEvent(
                     "Penalti y todo en juego",
                     "Minuto 85. El equipo va 1-2 abajo en un partido clave. Penalti. El lanzador habitual ha sido sustituido. El capitán mira alrededor. El balón está en el punto y alguien tiene que cogerlo.",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d009,
                     "Coger el balón y lanzar",
@@ -979,7 +979,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d010 = footballDataService.createEvent(
                     "Una jugada que se te ocurre a ti solo",
                     "Recibes de espaldas, te giras, ves un pasillo que nadie más ve. Un pase de 30 metros entre tres defensas que deja a tu compañero solo ante el portero. Marca. El estadio aplaude el gol. Pero los que entienden de fútbol aplauden tu pase.",
-                    "deportivo", "informativo", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "informativo", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d010,
                     "Celebrarlo como un gol propio",
@@ -994,7 +994,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d011 = footballDataService.createEvent(
                     "Hoy sales de inicio",
                     "El míster pone el once en la pizarra. Tu nombre está ahí. Primera titularidad oficial. Algunos compañeros te dan una palmada en el hombro. El capitán te mira: 'No te me cagues, ¿eh?' Sonríe al decirlo.",
-                    "deportivo", "informativo", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "informativo", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d011,
                     "Salir concentrado y dar tu mejor versión",
@@ -1009,7 +1009,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d012 = footballDataService.createEvent(
                     "Minuto 93 y pierdes 0-1",
                     "El cuarto árbitro levanta la pantalla: 4 minutos de descuento. El equipo va 0-1. Saque de esquina. Todo el equipo sube, incluido el portero. El córner viene al segundo palo. Te llega a ti.",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d012,
                     "Cabezazo con todo",
@@ -1024,7 +1024,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d013 = footballDataService.createEvent(
                     "El míster cambia el sistema",
                     "Descanso. El equipo va 0-0 y no crea ni media ocasión. El míster borra la pizarra y dibuja una formación nueva: 'Vamos a cambiarlo todo. Tú juegas más adelantado.' Tu posición cambia respecto a lo habitual.",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d013,
                     "Adaptarte sin rechistar al nuevo puesto",
@@ -1039,7 +1039,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d014 = footballDataService.createEvent(
                     "Hoy juegas contra tu ex-equipo",
                     "El calendario lo quiso así. Hoy te toca enfrentarte al club que te formó. En la grada hay gente que te vio debutar. Algunos te aplaudirán cuando salgas al campo. Otros no. Depende de cómo te fuiste.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d014,
                     "Saludar a tus ex-compañeros y jugar con respeto",
@@ -1054,7 +1054,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d015 = footballDataService.createEvent(
                     "El fallo que nadie olvida",
                     "Solo ante el portero. Estadio de pie. La grada ya celebra. Chut. Al poste. Rebote. Fuera. El silencio dura tres segundos y pesa tres toneladas. El míster se lleva las manos a la cabeza. Los compañeros miran al suelo.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d015,
                     "Apretar los dientes y seguir pidiendo el balón",
@@ -1084,7 +1084,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d017 = footballDataService.createEvent(
                     "Tres partidos mirando desde el banquillo",
                     "Tercer partido consecutivo sin jugar. El culo ya conoce cada centímetro del banquillo. El míster no te da explicaciones. El que juega en tu puesto no lo está haciendo mal. Pero tampoco brillante.",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d017,
                     "Hablar con el míster y preguntarle qué necesitas",
@@ -1103,7 +1103,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d018 = footballDataService.createEvent(
                     "Gol el día de tu cumpleaños",
                     "Casualidades del calendario: hoy es tu cumpleaños y hay partido. En el minuto 22, te llega un balón suelto en el área y la mandas dentro. El marcador electrónico pone tu nombre y la grada canta el cumpleaños feliz. No hay guion mejor.",
-                    "deportivo", "informativo", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "informativo", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d018,
                     "Hacer el gesto de soplar las velas en la celebración",
@@ -1118,7 +1118,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d019 = footballDataService.createEvent(
                     "¿Fue fuera de juego o no?",
                     "Gol tuyo. El estadio celebra. Pero las repeticiones muestran que estabas en fuera de juego por un pie. El VAR revisa. Espera. Espera. GOL VÁLIDO. El estadio rival estalla. La prensa te preguntará después del partido.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d019,
                     "Decir en rueda de prensa que no lo has visto claro",
@@ -1137,7 +1137,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d020 = footballDataService.createEvent(
                     "La noche perfecta",
                     "Hay partidos y HAY partidos. Este es de los segundos. Todo te sale. Cada control, cada pase, cada disparo. El campo se mueve a tu ritmo. Dos goles, una asistencia y una ovación del estadio entero cuando el míster te sustituye en el 80. Te levantas del banquillo y todo el campo se pone en pie. Esto es lo que soñabas cuando eras un crío.",
-                    "deportivo", "informativo", "epic", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "informativo", "epic", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d020,
                     "Disfrutarlo sabiendo que noches así hay pocas",
@@ -1156,7 +1156,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d021 = footballDataService.createEvent(
                     "La has metido en tu propia portería",
                     "Centro desde la banda. Intentas despejar de cabeza y la mandas al fondo de tu propia red. El estadio se queda helado. Tu portero te mira. El míster se sienta en el banquillo. El marcador cambia. Quedan 40 minutos por delante y un nudo en el estómago que no se va.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d021,
                     "Levantar la mano, disculparte y seguir jugando",
@@ -1171,7 +1171,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d022 = footballDataService.createEvent(
                     "Gol anulado por el VAR",
                     "Volea desde fuera del área. El balón entra por la escuadra. Corres a celebrarlo. Dos minutos de espera mirando la pantalla. El árbitro se lleva la mano al auricular. Hace el rectángulo con las manos. Gol anulado. Fuera de juego en el inicio de la jugada. Te quedas con la celebración a medias.",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d022,
                     "Aceptarlo y seguir a lo tuyo",
@@ -1186,7 +1186,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d023 = footballDataService.createEvent(
                     "Falta al borde del área",
                     "Falta a 20 metros. El lanzador habitual se acerca al balón, pero tú sientes que hoy es tu día. La barrera se coloca. El portero grita instrucciones. El estadio espera.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d023,
                     "Pedir la falta y lanzar",
@@ -1201,7 +1201,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d024 = footballDataService.createEvent(
                     "El defensa rival te tiene fichado",
                     "Llevas tres faltas recibidas del mismo defensa. En la cuarta, te pisa el tobillo con los tacos cuando el balón ya no está. No es una falta normal. Es un mensaje. El árbitro pita pero no saca tarjeta. El defensa te susurra: 'La próxima va sin balón.'",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d024,
                     "No entrar al trapo y ganarle con fútbol",
@@ -1220,7 +1220,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d025 = footballDataService.createEvent(
                     "Tanda de penaltis. Eliminatoria.",
                     "Final del partido. Empate. Prórroga agónica. Y ahora todo se decide desde los once metros. El míster escribe la lista de lanzadores en un papel. Tu nombre está. Eres el cuarto. Los tres primeros de tu equipo marcan. Los del rival también. Te toca.",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d025,
                     "Tirar con potencia al centro",
@@ -1235,7 +1235,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d026 = footballDataService.createEvent(
                     "Han echado al míster",
                     "Llegas al entrenamiento y hay un corro en el vestuario. El míster ha sido destituido. En su lugar hay un tío que no conoces con carpeta nueva y cara de pocos amigos. El primer discurso del nuevo: 'No conozco a nadie. Todo el mundo empieza de cero. El que quiera jugar, que me lo demuestre.'",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d026,
                     "Adaptarte al nuevo sistema y ganarte su confianza",
@@ -1250,7 +1250,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d027 = footballDataService.createEvent(
                     "Final perdida",
                     "Has llegado a la final. Todo el mundo esperaba que ganaras. Y has perdido. 0-1 con un gol en el descuento. El trofeo se queda en la otra vitrina. Mientras el rival celebra, tú te quedas sentado en el césped mirando al vacío. El vestuario huele a derrota.",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d027,
                     "Felicitar al rival y prometer volver",
@@ -1269,7 +1269,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d028 = footballDataService.createEvent(
                     "¡CAMPEONES!",
                     "Pitido final. 2-0. Has ganado tu primer título. El estadio estalla. Los compañeros te agarran, te levantan, te tiran al aire. El capitán te planta la copa en las manos: 'Levántala tú, te la has ganado.' Tiemblas. La levantas. El flash de cien cámaras te ciega.",
-                    "deportivo", "unico", "epic", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "unico", "epic", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d028,
                     "Disfrutarlo como un niño que acaba de cumplir su sueño",
@@ -1284,7 +1284,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d029 = footballDataService.createEvent(
                     "Remontada épica",
                     "Ibais 0-2 en el descanso. El vestuario era un funeral. El míster ha pegado tres gritos, ha cambiado la táctica y habéis salido a la segunda parte como poseídos. 1-2 en el 60. 2-2 en el 75. Queda un cuarto de hora. ¿Se puede?",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d029,
                     "Pedir el balón y liderar el ataque final",
@@ -1299,7 +1299,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d030 = footballDataService.createEvent(
                     "Te han robado un gol en la línea",
                     "Regateas al portero, el gol está cantado, solo tienes que empujarla a la red vacía... y un compañero aparece por detrás y la mete él. Se lleva la celebración. El gol es suyo. Tú te quedas con las manos en la cabeza y la boca abierta.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d030,
                     "Tragártelo y celebrar con él",
@@ -1314,7 +1314,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d031 = footballDataService.createEvent(
                     "Diluvio universal en el campo",
                     "Llueve como si el cielo se hubiera roto. El campo es un barrizal. El balón no bota, los tacos resbalan y la visibilidad es de diez metros. El árbitro decide seguir. Hay que jugar en estas condiciones.",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d031,
                     "Juego directo, balones largos y físico",
@@ -1344,7 +1344,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d033 = footballDataService.createEvent(
                     "Hoy juegas contra tu ídolo de la infancia",
                     "Tenías su póster en la habitación. Tenías sus botas. Aprendiste a chutar viéndole por la tele. Y ahora está en el túnel de vestuarios a tres metros de ti, poniéndose los guantes. Hoy juegas contra él.",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d033,
                     "Pedirle la camiseta antes del partido",
@@ -1359,7 +1359,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d034 = footballDataService.createEvent(
                     "Tu propia afición te silba",
                     "Llevas tres partidos sin hacer nada relevante. Hoy, cuando recibes el balón en el minuto 20, se oye un murmullo de silbidos desde la grada. Tu grada. Tu gente. El capitán se acerca: 'Pasa de ellos. Juega.'",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d034,
                     "Demostrarles que se equivocan en el campo",
@@ -1374,7 +1374,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d035 = footballDataService.createEvent(
                     "El centro viene alto y tú de espaldas",
                     "Centro perfecto desde la derecha. Te llega a la altura del pecho pero estás de espaldas a la portería. Tienes dos opciones: bajarla de pecho y girarte, o intentar lo que todo futbolista sueña con hacer alguna vez.",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d035,
                     "Intentar la chilena",
@@ -1419,7 +1419,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d038 = footballDataService.createEvent(
                     "El equipo pierde y te señalan a ti",
                     "Derrota dura. 0-3 en casa. La prensa necesita un culpable y te ha tocado a ti. Los titulares de mañana dirán tu nombre con letras grandes. El míster intenta protegerte: 'La derrota es de todos.' Pero el daño ya está hecho.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d038,
                     "Asumir tu parte y no buscar excusas",
@@ -1449,7 +1449,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d040 = footballDataService.createEvent(
                     "Día de final de copa",
                     "El estadio está lleno. Tu familia está en la grada. Hay cámaras en cada esquina. El presidente del país va a entregar el trofeo. Todo el mundo te mira. Tu madre no ha pegado ojo. Tú tampoco. Pero por diferentes razones.",
-                    "deportivo", "decision", "epic", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "epic", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d040,
                     "Jugar como si fuera un partido más",
@@ -1479,7 +1479,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d042 = footballDataService.createEvent(
                     "Te invitan a un partido benéfico",
                     "Un evento solidario organizado por una fundación. Estrellas retiradas, jugadores en activo y famosos que no dan pie con bola. Es por una buena causa. Tu representante te lo comenta: 'Es buen escaparate y haces algo bueno.'",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d042,
                     "Ir y disfrutar del evento",
@@ -1509,7 +1509,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d044 = footballDataService.createEvent(
                     "Empate al final. Hay prórroga.",
                     "90 minutos. Empate. El árbitro señala que hay 30 minutos más. Las piernas no dan para más. El míster te pregunta: '¿Puedes aguantar o te cambio?'",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d044,
                     "Decirle que puedes y quedarte",
@@ -1524,7 +1524,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d045 = footballDataService.createEvent(
                     "Se te ocurre una locura",
                     "Recibes de espaldas en el área. Hay un compañero desmarcado a tu derecha. Lo normal es girarte y pasarle. Lo loco es hacerlo de tacón, sin mirar, fiándote del instinto.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d045,
                     "Tacón de fantasía",
@@ -1539,7 +1539,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d046 = footballDataService.createEvent(
                     "El equipo lleva 6 partidos sin ganar",
                     "Seis jornadas. Cero victorias. La moral del vestuario está por los suelos. El míster cada vez grita más y sonríe menos. La afición empieza a perder la paciencia. Hoy, en casa, contra un rival directo, es la última oportunidad de cambiar la dinámica.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d046,
                     "Dar un paso al frente y arengar al vestuario",
@@ -1569,7 +1569,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d048 = footballDataService.createEvent(
                     "Tu compañero se queda en el suelo",
                     "Jugada normal. Tu compañero cae mal. Se agarra la rodilla. No se levanta. El fisio entra corriendo. El silencio del campo te pone los pelos de punta. Se lo llevan en camilla. Te mira desde la camilla con los ojos vidriosos.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d048,
                     "Acercarte a darle ánimos mientras se lo llevan",
@@ -1584,7 +1584,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d049 = footballDataService.createEvent(
                     "MVP de la jornada",
                     "Después del partido suena tu teléfono. La liga te ha elegido como el mejor jugador de la jornada. Tu foto con la camiseta del partido aparece en la web oficial. Tu representante te felicita. El míster te manda un mensaje: 'Bien. Pero el domingo hay otro partido.'",
-                    "deportivo", "informativo", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "informativo", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d049,
                     "Compartirlo en redes con humildad",
@@ -1599,7 +1599,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d050 = footballDataService.createEvent(
                     "Último partido. Fin de temporada.",
                     "90 minutos y se acabó. Da igual el resultado. Lo que importa es el camino: los goles, los fallos, las victorias, las derrotas, las noches de Champions, los domingos grises, las lesiones y las remontadas. El árbitro pita el final. Te quedas en el campo unos segundos más que nadie.",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d050,
                     "Aplaudir a la afición y despedirte hasta la próxima",
@@ -1617,7 +1617,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d051 = footballDataService.createEvent(
                     "Crujido en la rodilla",
                     "Aceleración en el minuto 30. Sin contacto. Notas un chasquido. Te caes solo. Sabes lo que es antes de que llegue el médico. Rotura de ligamento cruzado. La camilla, el túnel, la resonancia, y la frase que más duele: 'Seis meses.'",
-                    "deportivo", "unico", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "unico", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d051,
                     "Afrontarlo como un reto personal",
@@ -1632,7 +1632,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d052 = footballDataService.createEvent(
                     "El primer entrenamiento después de la lesión",
                     "Seis meses sin tocar un balón. Te atas las botas con manos temblorosas. Sales al campo. El césped te parece más verde que nunca. El primer sprint te da miedo. La rodilla aguanta. El segundo sprint, menos miedo. Al tercero, sonríes.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d052,
                     "Ir poco a poco, sin forzar",
@@ -1647,7 +1647,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d053 = footballDataService.createEvent(
                     "Te cambian en el descanso",
                     "El míster entra al vestuario, mira la pizarra y dice tu número: 'Sales. No me estás dando lo que necesito ahí.' Delante de todos. El sustituto ya se está poniendo las botas. La puerta del vestuario nunca ha pesado tanto.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d053,
                     "Aceptarlo sin montar ningún drama",
@@ -1666,7 +1666,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d054 = footballDataService.createEvent(
                     "Bronca pública del míster",
                     "En pleno entrenamiento, delante de todo el equipo, el míster para el ejercicio y te señala: '¿Qué estás haciendo? ¿Estás aquí o estás en la luna? Si no quieres entrenar, coge la puerta. Pero no me hagas perder el tiempo a mí ni a tus compañeros.'",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d054,
                     "Callarte y apretar los dientes",
@@ -1685,7 +1685,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d055 = footballDataService.createEvent(
                     "No estás en la lista",
                     "Viernes por la tarde. Sale la convocatoria para el partido del sábado. Tu nombre no está. No estás lesionado. No estás sancionado. Simplemente no estás. El míster no te ha dicho nada. El WhatsApp del vestuario explota.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d055,
                     "Ir al despacho del míster y preguntarle por qué",
@@ -1700,7 +1700,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d056 = footballDataService.createEvent(
                     "Tu sustituto está en racha",
                     "Te has perdido tres partidos por una molestia muscular. Tu sustituto ha marcado cuatro goles en esos tres partidos. La grada corea su nombre. La prensa habla de él. Cuando vuelves al entrenamiento, el míster no te garantiza el puesto.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d056,
                     "Competir limpiamente por el puesto",
@@ -1715,7 +1715,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d057 = footballDataService.createEvent(
                     "El rival te busca las cosquillas",
                     "El mediocampista estrella del otro equipo no para de hablar. 'Eh, chaval, ¿tú de dónde has salido? ¿De Segunda B?' Cada vez que pasas cerca te suelta una. El árbitro no le dice nada. Los compañeros te miran: ¿vas a aguantar?",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d057,
                     "Responderle con un caño y una sonrisa",
@@ -1749,7 +1749,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d059 = footballDataService.createEvent(
                     "Roja a tu compañero. Jugáis con diez.",
                     "Minuto 55. Roja directa a tu compañero. Quedan 35 minutos con uno menos. El equipo se mira. El míster grita desde la banda cambiando la táctica. Ahora hay que correr por dos.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d059,
                     "Dar un paso al frente y correr por dos",
@@ -1764,7 +1764,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d060 = footballDataService.createEvent(
                     "Si no ganas, bajáis",
                     "Última jornada. Si no ganáis, descenso. El vestuario es una mezcla de miedo y determinación. El míster no da charla. Pone una foto de la afición en el proyector: 'Por ellos.' Minuto 80. 0-0. Te llega un balón en la frontal.",
-                    "deportivo", "decision", "epic", "profesional", 18, 38, 1, 2, null
+                    "deportivo", "decision", "epic", "profesional", 16, 38, 1, 2, null
             );
             footballDataService.createOption(d060,
                     "Disparar sin pensarlo",
@@ -1779,7 +1779,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d061 = footballDataService.createEvent(
                     "¡Habéis subido!",
                     "Pitido final. El equipo ha ascendido. Jugadores llorando, cuerpo técnico abrazándose, la grada cantando sin parar. Has sido parte fundamental del ascenso — tus goles y tu juego han llevado al equipo a la categoría de arriba. El presidente baja al césped con una botella de champán.",
-                    "deportivo", "unico", "epic", "profesional", 18, 38, 1, 2, null
+                    "deportivo", "unico", "epic", "profesional", 16, 38, 1, 2, null
             );
             footballDataService.createOption(d061,
                     "Celebrarlo con todo el club y la ciudad",
@@ -1794,7 +1794,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d062 = footballDataService.createEvent(
                     "Habéis bajado",
                     "Pitido final. Descenso confirmado. El estadio se vacía en silencio. Los jugadores se quedan en el césped mirando al vacío. Algunos lloran. Otros se van directos al vestuario sin hablar. Tú te quedas sentado en la banda con la camiseta por encima de la cabeza.",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d062,
                     "Dar la cara ante la afición que se queda",
@@ -1869,7 +1869,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d067 = footballDataService.createEvent(
                     "Roja injusta",
                     "Disputas un balón con el rival. Llegas primero. El contacto es mínimo. El rival se tira al suelo como si le hubieran disparado. El árbitro saca roja directa. No es falta ni de broma. La repetición lo demuestra. Pero ya estás fuera.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d067,
                     "Irte sin montar el número, apelando después",
@@ -1899,7 +1899,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d069 = footballDataService.createEvent(
                     "Quince minutos calentando para nada",
                     "El míster te manda calentar en el 60. Corres por la banda quince minutos mientras el partido sigue. La grada te aplaude. Vuelves. El míster te mira. '...no, siéntate. Vamos bien así.' Te sientas con el chándal húmedo de sudor y la frustración seca.",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d069,
                     "Tragártelo y no decir nada",
@@ -1914,7 +1914,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d070 = footballDataService.createEvent(
                     "El pase perfecto que no acaba en gol",
                     "Filtras un pase entre líneas que deja a tu compañero solo, completamente solo, ante el portero. Se la tiene que meter. Y la tira fuera. El asistencia que debería haber sido se queda en un 'casi'. Él te mira con cara de disculpa.",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d070,
                     "Animarle y decirle que la próxima va dentro",
@@ -1929,7 +1929,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d071 = footballDataService.createEvent(
                     "El portero te tiene calado",
                     "Cada vez que te acercas al área, el portero rival te habla: 'Venga, tira, que te la paro. Siempre tiras al mismo lado.' Lo peor es que tiene razón: te ha parado dos disparos.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d071,
                     "Cambiar tu disparo y pillarle a contrapié",
@@ -1993,7 +1993,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d075 = footballDataService.createEvent(
                     "Partido sin público",
                     "Sanción al club. Partido a puerta cerrada. El estadio vacío. Cada pelotazo retumba como un eco. No hay grada, no hay cánticos, no hay ambiente. Solo fútbol puro. Y el silencio, que es ensordecedor.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d075,
                     "Jugar con la misma intensidad que siempre",
@@ -2011,7 +2011,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d076 = footballDataService.createEvent(
                     "Gol rival y celebración en tu cara",
                     "El delantero rival marca y viene corriendo hacia tu zona a celebrarlo. Se pone de rodillas a dos metros de ti, se señala el nombre de la camiseta y grita mirándote directamente. El árbitro no hace nada. La grada rival enloquece.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d076,
                     "Darle la vuelta y marcar tú después",
@@ -2026,7 +2026,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d077 = footballDataService.createEvent(
                     "Pretemporada contra un grande",
                     "Amistoso de pretemporada contra el {topClub}. No vale para nada en la clasificación, pero vale para todo en tu cabeza. Es la primera vez que pisas el campo con esos jugadores. Los que salen por la tele, a tres metros de ti.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 2, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 2, null
             );
             footballDataService.createOption(d077,
                     "Jugar sin complejos y demostrar que puedes competir con ellos",
@@ -2071,7 +2071,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d080 = footballDataService.createEvent(
                     "Tres asistencias en un partido",
                     "No has marcado, pero tres compañeros han celebrado un gol gracias a ti. Tres pases de gol en un solo partido. Después del último, el comentarista dice por la radio: 'No necesita marcar para ser el mejor del campo.'",
-                    "deportivo", "informativo", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "informativo", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d080,
                     "Celebrar cada gol como si fuera tuyo",
@@ -2086,7 +2086,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d081 = footballDataService.createEvent(
                     "Micro en la cara nada más pitar el final",
                     "El partido acaba. Un periodista te intercepta en la banda con un micro y una cámara: 'Gran partido. ¿Cómo te has sentido ahí dentro?' Estás sudando, jadeando y tienes tres segundos para pensar qué decir delante de dos millones de espectadores.",
-                    "deportivo", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d081,
                     "Dar declaraciones completas y hablar bien",
@@ -2101,7 +2101,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d082 = footballDataService.createEvent(
                     "¿Ha entrado o no?",
                     "Tu disparo pega en el larguero, bota en la línea y sale repelido. El linier no señala gol. El VAR revisa. Las imágenes no son concluyentes. Después de tres minutos mirando la pantalla, el árbitro decide: no hay gol. Tú juras que ha entrado.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d082,
                     "Aceptar la decisión y seguir jugando",
@@ -2116,7 +2116,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d083 = footballDataService.createEvent(
                     "El utillero que lo ha visto todo",
                     "Después del entrenamiento, el utillero del club —que lleva 30 años ahí y ha visto pasar a tres generaciones de jugadores— te para en el pasillo: 'Chaval, un consejo: no te creas mejor de lo que eres, pero tampoco peor. He visto a muchos quemarse por ambas cosas.'",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d083,
                     "Agradecerle el consejo y tomártelo en serio",
@@ -2131,7 +2131,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d084 = footballDataService.createEvent(
                     "Sales lesionado y el campo rival te aplaude",
                     "Caes mal tras un salto. Molestia seria en el tobillo. No puedes seguir. Mientras te retiras andando por la banda, la afición RIVAL se pone de pie y aplaude. No te conocen, no les has ganado nada, pero respetan que has dejado todo en el campo.",
-                    "deportivo", "informativo", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "informativo", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d084,
                     "Aplaudir de vuelta con emoción contenida",
@@ -2146,7 +2146,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d085 = footballDataService.createEvent(
                     "Balón dividido con tu amigo",
                     "Jugada en el centro del campo. El balón suelto. Tú vas a por él. El que viene por el otro lado es tu mejor amigo de la infancia, que juega en el rival. Os vais a encontrar. Uno de los dos va a llevarse el golpe.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d085,
                     "Ir a por el balón con todo, es tu trabajo",
@@ -2176,7 +2176,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d087 = footballDataService.createEvent(
                     "El del 6 te sigue a todas partes",
                     "El defensa rival te ha marcado como un perro guardián. A donde vas, va él. Si te acercas a por agua, casi se viene contigo. Llevas 40 minutos sin tocar un balón porque no te deja ni respirar.",
-                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d087,
                     "Moverte más para cansarle y crear espacios para otros",
@@ -2191,7 +2191,7 @@ public class DataInitializer implements CommandLineRunner {
             Event d088 = footballDataService.createEvent(
                     "Saque de esquina y la mandas directa a la red",
                     "Córner tuyo. Te acercas al banderín. Levantas la mano indicando algo al compañero... pero en realidad miras la portería. El portero está adelantado. Hay un hueco. La rosca perfecta podría entrar. ¿Te atreves?",
-                    "deportivo", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "deportivo", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(d088,
                     "Mandarla directa a portería con rosca",
@@ -2299,7 +2299,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f001 = footballDataService.createEvent(
                     "Tu representante te llama",
                     "Suena el teléfono después del entrenamiento. Tu representante va directo al grano: 'Oye, hay un club que ha preguntado por ti. Todavía no hay nada concreto, pero el interés es real. ¿Cómo lo ves?'",
-                    "fichaje", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f001,
                     "Quiero saber quién es",
@@ -2318,7 +2318,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f002 = footballDataService.createEvent(
                     "Alguien te está observando",
                     "Después del partido, un tipo con carpeta y chaqueta de club se acerca a tu representante en la grada. Hablan tres minutos. Tu representante baja y te dice: 'Llevamos varios partidos siguiéndote. Es del {club}.'",
-                    "fichaje", "decision", "common", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "common", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f002,
                     "Preguntar qué les parece tu rendimiento",
@@ -2337,7 +2337,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f003 = footballDataService.createEvent(
                     "La cosa se pone seria",
                     "Tu representante te cita para un café: 'El interés del {club} es real. Todavía no hay oferta, pero quieren seguir viéndote. Me han pedido informes, vídeos, todo. ¿Cómo lo gestionamos?'",
-                    "fichaje", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f003,
                     "Que sigan observándome, no tengo prisa",
@@ -2356,7 +2356,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f004 = footballDataService.createEvent(
                     "Han preguntado tu precio",
                     "Tu representante te llama con voz seria: 'El {club} ha preguntado cuánto costaría sacarte de aquí. Esto ya no es un rumor. Esto es una negociación.'",
-                    "fichaje", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f004,
                     "Escuchar la propuesta",
@@ -2375,7 +2375,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f005 = footballDataService.createEvent(
                     "Ha llegado una oferta por ti",
                     "El director deportivo te para en el pasillo: 'Oye, ha llegado una oferta oficial del {club}. No te voy a mentir, es una cifra importante. Pero la decisión es tuya. ¿Qué quieres hacer?'",
-                    "fichaje", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f005,
                     "Quiero saber cuánto ofrecen",
@@ -2394,7 +2394,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f006 = footballDataService.createEvent(
                     "La oferta no es para tirar cohetes",
                     "Tu representante se sienta contigo: 'Mira, la oferta no es especialmente alta, pero el {club} te quiere de verdad. El entrenador ha pedido tu fichaje personalmente. ¿Eso cuenta para algo?'",
-                    "fichaje", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f006,
                     "Intentar negociar una mejora",
@@ -2413,7 +2413,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f007 = footballDataService.createEvent(
                     "No serías titular",
                     "Tu representante te lo suelta sin anestesia: 'El {club} te quiere, pero no te garantizan titularidad. Irías como jugador de rotación. Más dinero, menos minutos. ¿Te compensa?'",
-                    "fichaje", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f007,
                     "Me interesa igualmente, ya me ganaré el puesto",
@@ -2432,7 +2432,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f008 = footballDataService.createEvent(
                     "Te quieren como pieza clave",
                     "Tu representante te llama con tono diferente: 'El {club} no te quiere para completar plantilla. Te quiere como pieza importante desde el primer día. Titularidad garantizada y un proyecto deportivo serio.'",
-                    "fichaje", "decision", "rare", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "rare", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f008,
                     "Quiero ir, me convence el proyecto",
@@ -2735,7 +2735,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f026 = footballDataService.createEvent(
                     "El club quiere que te quedes",
                     "El director deportivo te para después del entrenamiento: 'Tu contrato entra en su última fase. Queremos que sigas con nosotros. ¿Hablamos?'",
-                    "fichaje", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f026,
                     "Renovar, estoy bien aquí",
@@ -2868,7 +2868,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f033 = footballDataService.createEvent(
                     "No te convence",
                     "Tu representante te presenta la oferta al detalle y tú niegas con la cabeza: 'No. No me veo ahí.' Él insiste: '¿Estás seguro? El dinero es bueno.' 'Seguro.'",
-                    "fichaje", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "decision", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f033,
                     "Confirmar el rechazo",
@@ -2966,7 +2966,7 @@ public class DataInitializer implements CommandLineRunner {
             Event f039 = footballDataService.createEvent(
                     "El fichaje perfecto para ti",
                     "El míster te para sonriendo: 'Hemos fichado a un jugador que va a encajar perfectamente contigo. Os vais a complementar de escándalo.' Y tiene razón: el nuevo ficha y os entendéis desde el primer entrenamiento.",
-                    "fichaje", "informativo", "uncommon", "profesional", 18, 38, 1, 3, null
+                    "fichaje", "informativo", "uncommon", "profesional", 16, 38, 1, 3, null
             );
             footballDataService.createOption(f039,
                     "Darle la bienvenida y conectar desde el primer día",
