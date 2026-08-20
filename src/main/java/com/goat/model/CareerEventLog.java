@@ -1,6 +1,7 @@
 package com.goat.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,10 +27,12 @@ public class CareerEventLog {
 
     @ManyToOne
     @JoinColumn(name = "career_id", nullable = false)
+    @JsonIgnore
     private Career career;
 
     @ManyToOne
     @JoinColumn(name = "event_id", nullable = false)
+    @JsonIgnore
     private Event event;
 
 }

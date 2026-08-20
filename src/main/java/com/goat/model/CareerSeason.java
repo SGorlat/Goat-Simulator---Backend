@@ -1,6 +1,7 @@
 package com.goat.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class CareerSeason {
 
     @ManyToOne // Tu razonamiento es correcto. Muchas temporadas pertenecen a una carrera, pero cada temporada tiene una sola carrera.
     @JoinColumn(name = "career_id", nullable = false)
+    @JsonIgnore
     private Career career;
 
     @ManyToOne // muchas temporadas pueden pasar por equipos distintos, pero cada temporada concreta se juega en un solo equipo
