@@ -36,7 +36,7 @@ public class SimulationEngine {
 
 
         if(career.getCurrentTeam() == null){
-            double base = ((career.getFinishing())*0.3+ (career.getSpeed() * 0.2) / 5);
+            double base = ((career.getFinishing())*0.3+ (career.getSpeed() * 0.2) / 4);
             return (int) base + randomNum.nextInt(3);
         }
 
@@ -53,7 +53,7 @@ public class SimulationEngine {
             throw new RuntimeException("Error de posición");
         }
 
-        double teamFactor = career.getCurrentTeam().getPrestige() / 70.0; // valor 70 es equipo medio
+        double teamFactor = 0.5 + (career.getCurrentTeam().getPrestige() / 140.0); // valor 140 es equipo medio
         int lucky = randomNum.nextInt(100); // de 0 a 99
         double luckyFactor;
 
@@ -390,6 +390,27 @@ public class SimulationEngine {
 
             // Premios
             List<String> awards = evaluateAwards(career, goals, assists);
+
+            // Crecimiento automático del jugador según su growthMultiplier
+                    int playerGrowth = (int)(3 * career.getGrowthMultiplier());
+                    career.setSpeed(career.getSpeed() + playerGrowth);
+                    career.setTechnique(career.getTechnique() + playerGrowth);
+                    career.setFinishing(career.getFinishing() + playerGrowth);
+                    career.setPhysical(career.getPhysical() + playerGrowth);
+                    career.setMental(career.getMental() + playerGrowth);
+                    career.setVision(career.getVision() + playerGrowth);
+
+            // Degradación si mayor de 30 (igual que competidores)
+                    if (career.getCurrentAge() > 30) {
+                        Random random = new Random();
+                        career.setSpeed(career.getSpeed() - (random.nextInt(2) + 1));
+                        career.setTechnique(career.getTechnique() - (random.nextInt(2) + 1));
+                        career.setFinishing(career.getFinishing() - (random.nextInt(2) + 1));
+                        career.setPhysical(career.getPhysical() - (random.nextInt(2) + 1));
+                        career.setMental(career.getMental() - (random.nextInt(2) + 1));
+                        career.setVision(career.getVision() - (random.nextInt(2) + 1));
+                    }
+
 
             // Envejecemos 1 año
             career.setCurrentAge(career.getCurrentAge() + 1);

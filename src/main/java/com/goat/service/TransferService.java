@@ -113,11 +113,11 @@ public List<TransferOffer> generateOffer(Long careerId){
         int myOverallRating = (career.getSpeed() + career.getTechnique() + career.getFinishing()
                 + career.getPhysical() + career.getMental() + career.getVision()) / 6;
 
-        if (myOverallRating > team.getPrestige()) {
+        if (myOverallRating > team.getPrestige() + 20) {
             offer.setRole("Estrella");
-        } else if (myOverallRating > team.getPrestige() - 10) {
+        } else if (myOverallRating > team.getPrestige() + 5) {
             offer.setRole("Titular");
-        } else if (myOverallRating > team.getPrestige() - 20) {
+        } else if (myOverallRating > team.getPrestige() - 10) {
             offer.setRole("Rotación");
         } else {
             offer.setRole("Suplente");

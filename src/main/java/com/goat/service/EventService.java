@@ -68,6 +68,13 @@ public class EventService {
             }
         }
 
+        // Filtrar eventos de fichaje/cesión si eres Estrella o Titular
+        String role = career.getCurrentRole();
+        if (role != null && (role.equals("Estrella") || role.equals("Titular"))) {
+            eventFiltered.removeIf(e -> e.getCategory().equals("fichaje")
+                    && (e.getTitle().contains("cesión") || e.getTitle().contains("ceden")));
+        }
+
         // De los filtrados elegimos aleatorios y los guardamos en la lista nueva
         List<Event> selected = new ArrayList<>(); // lista con los 2-3 eventos que el jugador verá en ese turno
         Random randomNum = new Random();
@@ -81,6 +88,7 @@ public class EventService {
             selected.add(eventFiltered.get(index));
             eventFiltered.remove(index);  // quitar ese evento de ese indice para no repetir
         }
+
 
         return selected; // devolvemos los eventos que vera
     }
