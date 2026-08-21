@@ -40,7 +40,7 @@ public class SimulationEngine {
             return (int) base + randomNum.nextInt(3);
         }
 
-        double base = ((career.getFinishing() * 0.4) + (career.getSpeed() * 0.2) + (career.getTechnique() * 0.3)) / 10;
+        double base = ((career.getFinishing() * 0.4) + (career.getSpeed() * 0.2) + (career.getTechnique() * 0.3)) / 4;
         double positionFactor = 1.0; // por defecto
 
         if (career.getPosition().getName().equals("Delantero")) {
@@ -85,7 +85,7 @@ public class SimulationEngine {
             return (int) base + randomNum.nextInt(2);
         }
 
-        double base = (career.getVision() * 0.4 + career.getTechnique() * 0.3 + career.getSpeed() * 0.1) / 10;
+        double base = (career.getVision() * 0.4 + career.getTechnique() * 0.3 + career.getSpeed() * 0.1) / 4;
         double positionFactor = 1.0; // por defecto
 
         if (career.getPosition().getName().equals("Mediapunta")) {
@@ -98,7 +98,7 @@ public class SimulationEngine {
             throw new RuntimeException("Error de posición");
         }
 
-        double teamFactor = career.getCurrentTeam().getPrestige() / 70.0; // valor 70 es equipo medio
+        double teamFactor = career.getCurrentTeam().getPrestige() / 140.0; // valor 140 es equipo medio
         int lucky = randomNum.nextInt(100); // de 0 a 99
         double luckyFactor;
 
@@ -209,98 +209,64 @@ public class SimulationEngine {
 
     }
 
-
     private List<String> evaluateAwards(Career career, int goals, int assists) {
 
-        // Creamos lista vacia de premios
         List<String> awards = new ArrayList<>();
-
-        // Listado con competidores
         List<Competitor> competitors = competitorRepository.findByCareerIdAndActiveTrue(career.getId());
 
         // BOTA DE ORO
-        int bestScorerThanMe = 0; // Cuantos max goleadores hay, 0 mejor que yo
-        String bestScorer = ""; // nombre max goleador
+        int bestScorerThanMe = 0;
+        String bestScorer = "";
         int maxGoalsComp = 0;
 
         for (Competitor comp : competitors) {
-            // Buscamos el MAX goleador entre los competidores, se va revisando cada iteracion maxGoals con el comp y si es mayor se saca el nombnre como bestScorer
             if (comp.getSeasonGoals() > maxGoalsComp) {
                 maxGoalsComp = comp.getSeasonGoals();
                 bestScorer = comp.getName();
             }
-
-            // Comparamos con mis goles
             if (comp.getSeasonGoals() > goals) {
-                bestScorerThanMe++; // si 1 competidor me supera en goles sumamos 1
-
+                bestScorerThanMe++;
             }
         }
 
         if (bestScorerThanMe == 0) {
             awards.add("Bota de Oro - ¡Eres el máximo goleador!");
-        } else if (bestScorerThanMe == 1) {
-            awards.add("Has quedado 2º máximo goleador (ganó '" + bestScorer + "' con " + maxGoalsComp + " goles)");
-        } else if (bestScorerThanMe == 2) {
-            awards.add("Has quedado 3º máximo goleador (ganó '" + bestScorer + "' con " + maxGoalsComp + " goles)");
-
+        } else if (bestScorerThanMe <= 2) {
+            awards.add("Top 3 Bota de Oro (ganó '" + bestScorer + "' con " + maxGoalsComp + " goles)");
         }
 
-        // TROFEO KOPA (<21)
+        // TROFEO KOPA (<= 21 y mínimo 10 goles+asistencias)
+        if (career.getCurrentAge() <= 21 && goals + assists >= 10) {
+            int myOvr = (career.getFinishing() + career.getSpeed() + career.getTechnique() + career.getVision() + career.getMental() + career.getPhysical()) / 6;
+            String bestYoung = "";
+            int betterYoungThanMe = 0;
 
-
-        if (career.getCurrentAge() <= 21) {
-
-            // Mínimo para optar: al menos 5 goles o 3 asistencias
-            if (goals + assists < 10) {
-                // No opta — rendimiento insuficiente
-            } else {
-
-                // Media de stats
-                int myOverallRating = (career.getFinishing() + career.getSpeed() + career.getTechnique() + career.getVision() + career.getMental() + career.getPhysical()) / 6;
-
-                String bestYoung = "";
-                int betterYoungThanMe = 0;
-
-                for (Competitor comp : competitors) {
-                    if (comp.getAge() <= 21) {
-                        int overallRatingComp = (comp.getTechnique() + comp.getFinishing() + comp.getSpeed() + comp.getMental() + comp.getVision() + comp.getPhysical()) / 6;
-                        if (overallRatingComp > myOverallRating) {
-                            bestYoung = comp.getName();
-                            betterYoungThanMe++;
-                        }
+            for (Competitor comp : competitors) {
+                if (comp.getAge() <= 21) {
+                    int compOvr = (comp.getTechnique() + comp.getFinishing() + comp.getSpeed() + comp.getMental() + comp.getVision() + comp.getPhysical()) / 6;
+                    if (compOvr > myOvr) {
+                        bestYoung = comp.getName();
+                        betterYoungThanMe++;
                     }
                 }
+            }
 
-                if (betterYoungThanMe == 0) {
-                    awards.add("Trofeo KOPA -  ¡Mejor jugador joven del mundo!");
-                } else if (betterYoungThanMe == 1) {
-                    awards.add("Has quedado 2º en el trofeo KOPA (ganó '" + bestYoung + "')");
-                } else if (betterYoungThanMe == 2) {
-                    awards.add("Has quedado 3º en el trofeo KOPA (ganó '" + bestYoung + "')");
-
-                }
-
+            if (betterYoungThanMe == 0) {
+                awards.add("Trofeo KOPA - ¡Mejor jugador joven del mundo!");
+            } else if (betterYoungThanMe <= 2) {
+                awards.add("Top 3 Trofeo KOPA (ganó '" + bestYoung + "')");
             }
         }
 
         // BALÓN DE ORO — solo liga nivel 3 + reputation > 60
-
         if (career.getCurrentTeam() != null && career.getCurrentTeam().getLeague().getLevel() == 3 && career.getReputation() > 60) {
-
-            // puntuacion es la media ovr + goles + asist
-            int myScore = ((career.getFinishing() + career.getSpeed() + career.getTechnique()
-                    + career.getVision() + career.getMental() + career.getPhysical()) / 6)
-                    + goals + career.getReputation();
-
+            int myScore = ((career.getFinishing() + career.getSpeed() + career.getTechnique() + career.getVision() + career.getMental() + career.getPhysical()) / 6) + goals + career.getReputation();
             int betterThanMe = 0;
             String goldenBallWinner = "";
             int maxScoreComp = 0;
 
             for (Competitor comp : competitors) {
-                int compScore = ((comp.getFinishing() + comp.getSpeed() + comp.getTechnique()
-                        + comp.getVision() + comp.getMental() + comp.getPhysical()) / 6)
-                        + comp.getSeasonGoals() + comp.getReputation();
+                int compScore = ((comp.getFinishing() + comp.getSpeed() + comp.getTechnique() + comp.getVision() + comp.getMental() + comp.getPhysical()) / 6) + comp.getSeasonGoals() + comp.getReputation();
                 if (compScore > maxScoreComp) {
                     maxScoreComp = compScore;
                     goldenBallWinner = comp.getName();
@@ -310,21 +276,15 @@ public class SimulationEngine {
                 }
             }
 
-
             if (betterThanMe == 0) {
-                awards.add("Ganador del Balón de Oro -  ¡Mejor jugador del mundo!");
-            } else if (betterThanMe == 1) {
-                awards.add("Has quedado 2º en el Balón de Oro (ganó '" + goldenBallWinner + "')");
-            } else if (betterThanMe == 2) {
-                awards.add("Has quedado 3º en el Balón de Oro (ganó '" + goldenBallWinner + "')");
-
+                awards.add("Balón de Oro - ¡Mejor jugador del mundo!");
+            } else if (betterThanMe <= 2) {
+                awards.add("Top 3 Balón de Oro (ganó '" + goldenBallWinner + "')");
             }
-
         }
+
         return awards;
-
     }
-
 
     public CareerSeason simulateSeason(Long careerId) {
 
