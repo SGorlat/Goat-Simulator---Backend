@@ -124,15 +124,14 @@ public List<TransferOffer> generateOffer(Long careerId){
         }
 
         // AÑOS CONTRATO, cuanto mejor rol mas años ofrecen
-
         if (offer.getRole().equals("Estrella")) {
-            offer.setContractYears(4 + random.nextInt(2));    // 4-5 años
-        } else if (offer.getRole().equals("Titular")) {
             offer.setContractYears(3 + random.nextInt(2));    // 3-4 años
-        } else if (offer.getRole().equals("Rotación")) {
+        } else if (offer.getRole().equals("Titular")) {
             offer.setContractYears(2 + random.nextInt(2));    // 2-3 años
-        } else {
+        } else if (offer.getRole().equals("Rotación")) {
             offer.setContractYears(1 + random.nextInt(2));    // 1-2 años
+        } else {
+            offer.setContractYears(1);                         // 1 año
         }
 
         offers.add(offer); // añadimos la oferta a la lista de ofertas
