@@ -360,7 +360,7 @@ public class SimulationEngine {
                     career.setMental(career.getMental() + playerGrowth);
                     career.setVision(career.getVision() + playerGrowth);
 
-            // Degradación si mayor de 30 (igual que competidores)
+            // Degradación de stats si mayor de 30 (igual que competidores)
                     if (career.getCurrentAge() > 30) {
                         Random random = new Random();
                         career.setSpeed(career.getSpeed() - (random.nextInt(2) + 1));
@@ -370,6 +370,15 @@ public class SimulationEngine {
                         career.setMental(career.getMental() - (random.nextInt(2) + 1));
                         career.setVision(career.getVision() - (random.nextInt(2) + 1));
                     }
+
+            // Tope de stats a 99 si supera ese rango
+            career.setSpeed(Math.min(99, career.getSpeed()));
+            career.setTechnique(Math.min(99, career.getTechnique()));
+            career.setFinishing(Math.min(99, career.getFinishing()));
+            career.setPhysical(Math.min(99, career.getPhysical()));
+            career.setMental(Math.min(99, career.getMental()));
+            career.setVision(Math.min(99, career.getVision()));
+            career.setReputation(Math.min(100, career.getReputation()));
 
 
             // Envejecemos 1 año

@@ -159,21 +159,33 @@ public List<TransferOffer> generateOffer(Long careerId){
 
     public Career acceptOffer(Long careerId, TransferOffer offer) {
 
-        // Buscamos carrera
         Career career = careerRepository.findById(careerId)
                 .orElseThrow(() -> new RuntimeException("Carrera no encontrada"));
 
-        // Buscar el equipo nuevo por su id
         Team newTeam = teamRepository.findById(offer.getTeamId())
                 .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
 
-        // Cambiar/asignar a mi career el equipo nuevo, el salario y el rol.
+        // Si el equipo es el mismo que el actual seteamos nuevas relacioones
+        if (career.getCurrentTeam() != null && career.getCurrentTeam().getId().equals(offer.getTeamId())) {
+            // Renovación — lealtad premia
+            career.setFansRelation(Math.min(100, career.getFansRelation() + 15));
+            career.setBoardRelation(Math.min(100, career.getBoardRelation() + 10));
+            career.setTeamRelation(Math.min(100, career.getTeamRelation() + 10));
+        } else {
+            // Si no es el mismo establecemos las relaciones en 50 por defecto con el nuevo equipo
+            career.setFansRelation(50);
+            career.setBoardRelation(50);
+            career.setTeamRelation(50);
+            career.setCoachRelation(50);
+            career.setPressRelation(40);
+        }
+
+        // Seteamos el nuevo equipo,salario,rol y años de contrato de nuestra carrera
         career.setCurrentTeam(newTeam);
         career.setSalary(offer.getOfferedSalary());
         career.setCurrentRole(offer.getRole());
         career.setContractYearsLeft(offer.getContractYears());
 
-        // Guardar y devolver
         return careerRepository.save(career);
     }
 
