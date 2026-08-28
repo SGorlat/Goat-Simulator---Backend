@@ -45,10 +45,10 @@ public class Career {
     private Boolean hasNutritionist = false;
     private Boolean hasPsychology = false;
     private Boolean hasTrainer = false;
-    private Boolean hasBootsPremium;
-    private Boolean hasImageAgent;
-    private Boolean hasVideoAnalyst;
-    private Boolean hasPrivateChef;
+    private Boolean hasBootsPremium = false;
+    private Boolean hasImageAgent = false;
+    private Boolean hasVideoAnalyst = false;
+    private Boolean hasPrivateChef = false;
 
     private Double growthMultiplier = 1.0;
 

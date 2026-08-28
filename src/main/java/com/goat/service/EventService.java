@@ -128,6 +128,7 @@ public class EventService {
         career.setMental(career.getMental() + option.getMentalMod());
         career.setVision(career.getVision() + option.getVisionMod());
         career.setSavings(career.getSavings() + option.getSavingsMod());
+        career.setSavings(Math.max(0, career.getSavings())); // Valor minimo 0
         career.setReputation(career.getReputation() + option.getReputationMod());
         career.setCoachRelation(career.getCoachRelation() + option.getCoachRelationMod());
         career.setAgentRelation(career.getAgentRelation() + option.getAgentRelationMod());
@@ -168,13 +169,8 @@ public class EventService {
 
         careerEventLogRepository.save(log);
 
-
         return option.getOutcomeText();
 
-
     }
-
-
-
 
 }
