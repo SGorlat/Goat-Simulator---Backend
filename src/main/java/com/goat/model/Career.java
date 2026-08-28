@@ -40,10 +40,15 @@ public class Career {
     private Integer salary = 500;
     private Integer savings = 0;
 
-    private Boolean hasFisio = false;
+    // BOOST
+    private Boolean hasPhysio = false;
     private Boolean hasNutritionist = false;
     private Boolean hasPsychology = false;
     private Boolean hasTrainer = false;
+    private Boolean hasBootsPremium;
+    private Boolean hasImageAgent;
+    private Boolean hasVideoAnalyst;
+    private Boolean hasPrivateChef;
 
     private Double growthMultiplier = 1.0;
 

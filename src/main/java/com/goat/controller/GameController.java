@@ -1,6 +1,7 @@
 package com.goat.controller;
 
 import com.goat.dto.ChooseOptionRequest;
+import com.goat.dto.ShopItem;
 import com.goat.dto.TransferOffer;
 import com.goat.model.Career;
 import com.goat.model.CareerSeason;
@@ -20,14 +21,16 @@ public class GameController {
     private final TransferService transferService; // para ofertas de equipos
     private final SimulationEngine simulationEngine; // Simula que pasa en la temporada
     private final GameService gameService; // para siguiiente turno
+    private final ShopService shopService;
 
 
-    public GameController(CareerService careerService,EventService eventService,TransferService transferService,SimulationEngine simulationEngine,GameService gameService){
+    public GameController(CareerService careerService,EventService eventService,TransferService transferService,SimulationEngine simulationEngine,GameService gameService,ShopService shopService){
         this.careerService = careerService;
         this.eventService = eventService;
         this.transferService = transferService;
         this.simulationEngine = simulationEngine;
         this.gameService = gameService;
+        this.shopService = shopService;
     }
 
     // GET - Siguiente turno
@@ -66,6 +69,16 @@ public Career acceptOffert(@PathVariable Long id, @RequestBody TransferOffer off
         return transferService.acceptOffer(id,offer);
 }
 
+// GET - Obtener la lista de item para la tienda
+@GetMapping("/shop/{id}")
+public List<ShopItem> getItems(@PathVariable Long id){
+        return shopService.getShopItems(id);
+}
+
+@PostMapping("/shop/{careerId}/buy/{itemId}")
+    public Career buyItem(@PathVariable Long careerId,@PathVariable String itemId){
+        return shopService.buyItem(careerId,itemId);
+}
 
 
 }

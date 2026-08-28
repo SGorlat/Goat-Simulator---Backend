@@ -371,6 +371,52 @@ public class SimulationEngine {
                         career.setVision(career.getVision() - (random.nextInt(2) + 1));
                     }
 
+                if(career.getHasPhysio()){
+                    career.setPhysical(career.getPhysical() + 2);
+                }
+
+                if(career.getHasNutritionist()){
+                    career.setPhysical(career.getPhysical() + 1);
+                    career.setSpeed(career.getSpeed() + 1);
+                }
+
+                if(career.getHasPsychology()){
+                    career.setMental(career.getMental() + 2);
+                    career.setVision(career.getVision() + 2);
+                }
+
+                if(career.getHasTrainer()){
+                    career.setTechnique(career.getTechnique() + 2);
+                    career.setFinishing(career.getFinishing() + 1);
+                }
+                if(career.getHasBootsPremium()){
+                    career.setSpeed(career.getSpeed() + 2);
+                    career.setFinishing(career.getFinishing() + 1);
+                }
+                if(career.getHasImageAgent()){
+                    career.setReputation(career.getReputation() + 3);
+                    career.setPressRelation(career.getPressRelation() + 2);
+                }
+                if(career.getHasVideoAnalyst()){
+                    career.setVision(career.getVision() + 3);
+                }
+                if(career.getHasPrivateChef()){
+                    career.setPhysical(career.getPhysical() + 1);
+                    career.setSpeed(career.getSpeed() + 1);
+                    career.setMental(career.getMental() + 1);
+                }
+
+      // Tras boiost reseteamnos items de la tienda para la siguiente temporada
+                career.setHasPhysio(false);
+                career.setHasNutritionist(false);
+                career.setHasPsychology(false);
+                career.setHasTrainer(false);
+                career.setHasBootsPremium(false);
+                career.setHasImageAgent(false);
+                career.setHasVideoAnalyst(false);
+                career.setHasPrivateChef(false);
+
+
             // Tope de stats a 99 si supera ese rango
             career.setSpeed(Math.min(99, career.getSpeed()));
             career.setTechnique(Math.min(99, career.getTechnique()));
@@ -380,6 +426,13 @@ public class SimulationEngine {
             career.setVision(Math.min(99, career.getVision()));
             career.setReputation(Math.min(100, career.getReputation()));
 
+            // Tope de relaciones a 100
+            career.setFansRelation(Math.min(100, career.getFansRelation()));
+            career.setBoardRelation(Math.min(100, career.getBoardRelation()));
+            career.setTeamRelation(Math.min(100, career.getTeamRelation()));
+            career.setCoachRelation(Math.min(100, career.getCoachRelation()));
+            career.setPressRelation(Math.min(100, career.getPressRelation()));
+            career.setAgentRelation(Math.min(100, career.getAgentRelation()));
 
             // Envejecemos 1 año
             career.setCurrentAge(career.getCurrentAge() + 1);

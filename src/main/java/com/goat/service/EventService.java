@@ -1,9 +1,6 @@
 package com.goat.service;
 
-import com.goat.model.Career;
-import com.goat.model.CareerEventLog;
-import com.goat.model.Event;
-import com.goat.model.EventOption;
+import com.goat.model.*;
 import com.goat.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +24,24 @@ public class EventService {
         this.careerRepository = careerRepository;
         this.teamRepository = teamRepository;
         this.eventOptionRepository = eventOptionRepository;
+    }
+
+    private void replacePlaceholders(List<Event> events, Career career) {
+        String clubName = career.getCurrentTeam() != null ? career.getCurrentTeam().getName() : "tu club";
+
+        // Para {topClub}, cogemos un equipo random de nivel 3
+        List<Team> topTeams = teamRepository.findByLeagueLevel(3);
+        String topClubName = topTeams.isEmpty() ? "un grande" : topTeams.get(new Random().nextInt(topTeams.size())).getName();
+
+        for (Event event : events) {
+            event.setTitle(event.getTitle().replace("{club}", clubName).replace("{topClub}", topClubName));
+            event.setDescription(event.getDescription().replace("{club}", clubName).replace("{topClub}", topClubName));
+
+            for (EventOption option : event.getOptions()) {
+                option.setText(option.getText().replace("{club}", clubName).replace("{topClub}", topClubName));
+                option.setOutcomeText(option.getOutcomeText().replace("{club}", clubName).replace("{topClub}", topClubName));
+            }
+        }
     }
 
 
@@ -89,6 +104,7 @@ public class EventService {
             eventFiltered.remove(index);  // quitar ese evento de ese indice para no repetir
         }
 
+        replacePlaceholders(selected, career);
 
         return selected; // devolvemos los eventos que vera
     }
@@ -120,6 +136,20 @@ public class EventService {
         career.setTeamRelation(career.getTeamRelation() + option.getTeamRelationMod());
         career.setFansRelation(career.getFansRelation() + option.getFansRelationMod());
 
+        // Controlar tope de stats
+        career.setSpeed(Math.min(99, career.getSpeed()));
+        career.setTechnique(Math.min(99, career.getTechnique()));
+        career.setFinishing(Math.min(99, career.getFinishing()));
+        career.setPhysical(Math.min(99, career.getPhysical()));
+        career.setMental(Math.min(99, career.getMental()));
+        career.setVision(Math.min(99, career.getVision()));
+        career.setReputation(Math.min(100, career.getReputation()));
+        career.setFansRelation(Math.min(100, career.getFansRelation()));
+        career.setBoardRelation(Math.min(100, career.getBoardRelation()));
+        career.setTeamRelation(Math.min(100, career.getTeamRelation()));
+        career.setCoachRelation(Math.min(100, career.getCoachRelation()));
+        career.setPressRelation(Math.min(100, career.getPressRelation()));
+        career.setAgentRelation(Math.min(100, career.getAgentRelation()));
 
         // 4. Guardamos la carrera actualizada
         careerRepository.save(career);
