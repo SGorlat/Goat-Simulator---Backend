@@ -53,8 +53,7 @@ public class SimulationEngine {
             throw new RuntimeException("Error de posición");
         }
 
-        double teamFactor = 0.5 + (career.getCurrentTeam().getPrestige() / 140.0); // valor 140 es equipo medio
-        int lucky = randomNum.nextInt(100); // de 0 a 99
+        double teamFactor = 0.5 + (career.getCurrentTeam().getPrestige() / 140.0);        int lucky = randomNum.nextInt(100); // de 0 a 99
         double luckyFactor;
 
         if (lucky < 1) {
@@ -98,7 +97,7 @@ public class SimulationEngine {
             throw new RuntimeException("Error de posición");
         }
 
-        double teamFactor = career.getCurrentTeam().getPrestige() / 140.0; // valor 140 es equipo medio
+        double teamFactor = 0.5 + (career.getCurrentTeam().getPrestige() / 140.0); // valor 140 es equipo medio
         int lucky = randomNum.nextInt(100); // de 0 a 99
         double luckyFactor;
 
@@ -132,7 +131,7 @@ public class SimulationEngine {
 
         int randomFactor = randomNum.nextInt(21) - 10;
 
-        double points = prestigeTeam + (goals * 2) + (assist * 1.5) + randomFactor;
+        double points = prestigeTeam + (goals * 3) + (assist * 2.5) + randomFactor;
 
         int finalPosition;
         if (points > 110) {
@@ -230,7 +229,7 @@ public class SimulationEngine {
         }
 
         if (bestScorerThanMe == 0) {
-            awards.add("Bota de Oro - ¡Eres el máximo goleador!");
+            awards.add("Bota de Oro ¡Eres el máximo goleador!");
         } else if (bestScorerThanMe <= 2) {
             awards.add("Top 3 Bota de Oro (ganó '" + bestScorer + "' con " + maxGoalsComp + " goles)");
         }
@@ -252,7 +251,7 @@ public class SimulationEngine {
             }
 
             if (betterYoungThanMe == 0) {
-                awards.add("Trofeo KOPA - ¡Mejor jugador joven del mundo!");
+                awards.add("Trofeo KOPA ¡Mejor jugador joven del mundo!");
             } else if (betterYoungThanMe <= 2) {
                 awards.add("Top 3 Trofeo KOPA (ganó '" + bestYoung + "')");
             }
@@ -277,7 +276,7 @@ public class SimulationEngine {
             }
 
             if (betterThanMe == 0) {
-                awards.add("Balón de Oro - ¡Mejor jugador del mundo!");
+                awards.add("Balón de Oro ¡Mejor jugador del mundo!");
             } else if (betterThanMe <= 2) {
                 awards.add("Top 3 Balón de Oro (ganó '" + goldenBallWinner + "')");
             }
@@ -288,61 +287,62 @@ public class SimulationEngine {
 
     public CareerSeason simulateSeason(Long careerId) {
 
-        // Busco la carrera
         Career career = careerRepository.findById(careerId).orElseThrow(() -> new RuntimeException("Carrera no encontrada"));
 
-        // Rendimiento
-        int goals = calculateGoals(career); // goles de la temp
-        int assists = calculateAssists(career); // asist de la temp
-        int leaguePosition = calculateLeaguePosition(career, goals, assists); // posic equipo
+        int goals = calculateGoals(career);
+        int assists = calculateAssists(career);
+        int leaguePosition = calculateLeaguePosition(career, goals, assists);
 
-        // actualizamos prestigio del equipo segun posic
+        // Cargamos temporadas anteriores
+        List<CareerSeason> seasons = careerSeasonRepository.findByCareerIdOrderBySeasonNumberAsc(careerId);
 
-        Team team = career.getCurrentTeam(); //obtenemos el equipo
+        // Si te quedaste en el equipo y rendiste bien, el equipo mejora
+        if (!seasons.isEmpty()) {
+            CareerSeason lastSeason = seasons.get(seasons.size() - 1);
+            if (lastSeason.getLeaguePosition() != null
+                    && lastSeason.getTeam() != null
+                    && career.getCurrentTeam() != null
+                    && lastSeason.getTeam().getId().equals(career.getCurrentTeam().getId())) {
+                if (goals >= 10) {
+                    leaguePosition = Math.max(1, leaguePosition - 3);
+                } else if (goals >= 5) {
+                    leaguePosition = Math.max(1, leaguePosition - 1);
+                }
+            }
+        }
+
+        //  actualizamos prestigio con la posición ya ajustada
+        Team team = career.getCurrentTeam();
         if (team != null) {
             if (leaguePosition <= 2) {
-                team.setPrestige(team.getPrestige() + 5);       // candidato al título
+                team.setPrestige(team.getPrestige() + 5);
             } else if (leaguePosition <= 5) {
-                team.setPrestige(team.getPrestige() + 3);       // Champions/ascenso
+                team.setPrestige(team.getPrestige() + 3);
             } else if (leaguePosition <= 10) {
-                team.setPrestige(team.getPrestige() + 1);       // mitad alta
+                team.setPrestige(team.getPrestige() + 1);
             } else if (leaguePosition <= 15) {
-                team.setPrestige(team.getPrestige() - 1);       // mitad baja
+                team.setPrestige(team.getPrestige() - 1);
             } else if (leaguePosition <= 18) {
-                team.setPrestige(team.getPrestige() - 3);       // peligro
+                team.setPrestige(team.getPrestige() - 3);
             } else {
-                team.setPrestige(team.getPrestige() - 5);       // descenso
+                team.setPrestige(team.getPrestige() - 5);
             }
 
-            // BONUS prestige si mejora tempo anterior
-
-            // Busca TODAS las temporadas anteriores de esta carrera, ordenadas de la primera a la última
-            List<CareerSeason> seasons = careerSeasonRepository.findByCareerIdOrderBySeasonNumberAsc(careerId);
-
-            // Miramos si es temp 1 (Esta vacia)
+            // Bonus prestigio si mejora respecto a temporada anterior
             if (!seasons.isEmpty()) {
-                CareerSeason lastSeason = seasons.get(seasons.size() - 1); // Coge la última temp de la lista (ultimo item=tamaño -1) -> Si tengo temp 1, 2 y 3 guardadas, size() = 3, 3 - 1 = 2, seasons.get(2) = la temp 3
-
-               // Si tenemos posic temp anterior(no es null - solo 1ºtemp)
+                CareerSeason lastSeason = seasons.get(seasons.size() - 1);
                 if (lastSeason.getLeaguePosition() != null) {
-                        // Si la posic actual es menor que la de la campaña anterior -> +1 extra al prestigio
                     if (leaguePosition < lastSeason.getLeaguePosition()) {
                         team.setPrestige(team.getPrestige() + 1);
-
-                        // Si la posic actual es mayor que la de la campaña anterior -> -1 extra al prestigio
                     } else if (leaguePosition > lastSeason.getLeaguePosition()) {
                         team.setPrestige(team.getPrestige() - 1);
                     }
                 }
             }
 
-            // Limitar entre 10 y 99
             if (team.getPrestige() > 99) team.setPrestige(99);
             if (team.getPrestige() < 10) team.setPrestige(10);
-
-
             teamRepository.save(team);
-
         }
 
             // Evolucionar rivales
@@ -416,6 +416,9 @@ public class SimulationEngine {
                 career.setHasVideoAnalyst(false);
                 career.setHasPrivateChef(false);
 
+                // reseteamos los pasos de pretemporada a 0(0 = vacaciones)
+        career.setPreseasonStep(0);
+
 
             // Tope de stats a 99 si supera ese rango
             career.setSpeed(Math.min(99, career.getSpeed()));
@@ -455,7 +458,14 @@ public class SimulationEngine {
             // Rating de 1 a 10 basado en goles + asistencias + posición del equipo
 
                 //Math.min(10.0, ...) — tope máximo de 10. Si la suma pasa de 10, se queda en 10.
-            double rating = Math.min(10.0, (goals * 0.3 + assists * 0.2 + (20 - leaguePosition) * 0.15)); // 20 es loes equipos totales de la liga
+        double teamLevelBonus = 0;
+        int leagueLevel = career.getCurrentTeam().getLeague().getLevel();
+        if (leagueLevel == 1 && goals >= 10) teamLevelBonus = 3.0;
+        else if (leagueLevel == 1 && goals >= 5) teamLevelBonus = 1.5;
+        else if (leagueLevel == 2 && goals >= 15) teamLevelBonus = 2.0;
+        else if (leagueLevel == 2 && goals >= 8) teamLevelBonus = 1.0;
+
+        double rating = Math.min(10.0, (goals * 0.3 + assists * 0.2 + (20 - leaguePosition) * 0.15 + teamLevelBonus)); // 20 es loes equipos totales de la liga
             careerSeason.setSeasonRating(Math.round(rating * 10.0) / 10.0); // redondea a 1 decimal
 
             careerSeason.setTitlesWon(awards.isEmpty() ? null : String.join(", ", awards)); //String.join...convierte la lista de premios en texto separado por coma
@@ -465,10 +475,57 @@ public class SimulationEngine {
                 career.setContractYearsLeft(career.getContractYearsLeft()-1);
             }
 
-            // Guardamos temporada actual
+        // DINERO FINAL
+
+        int salary = career.getSalary(); // sacamos el salario
+
+        // Quitamos impuestos
+        int taxes = (int)(salary*0.35);
+
+        // Coste alquiler vivienda segun nivel de liga
+
+        int rent;
+        switch (career.getCurrentTeam().getLeague().getLevel()){
+            case 1: rent =  30000;
+                break;
+            case 2: rent =  60000;
+                break;
+            case 3: rent =  120000;
+                break;
+            default: rent = 30000;
+        }
+
+        // Estilo de vida segun reputación
+        int lifeStyle;
+        if (career.getReputation() < 35) {
+            lifeStyle = (int)(salary * 0.10);
+        } else if (career.getReputation() < 70) {
+            lifeStyle = (int)(salary * 0.12);
+        } else {
+            lifeStyle = (int)(salary * 0.15);
+        }
+
+        // Coste agente
+        int agent = (int)(salary * 0.08);
+
+        // TOTAL
+        int total = taxes + rent + lifeStyle + agent;
+        int salaryFinal = salary - total;
+
+
+        career.setSavings(career.getSavings() + salaryFinal);
+
+        careerSeason.setSalaryGross(salary);
+        careerSeason.setTaxesPaid(taxes);
+        careerSeason.setRentPaid(rent);
+        careerSeason.setLifestylePaid(lifeStyle);
+        careerSeason.setAgentPaid(agent);
+        careerSeason.setSalaryNet(salaryFinal);
+
+
+        // Guardamos temporada actual
             careerSeasonRepository.save(careerSeason);
 
-            career.setSavings(career.getSavings() + career.getSalary());
 
             // Guardamos carrera actualizada con 1 temp +
             careerRepository.save(career);

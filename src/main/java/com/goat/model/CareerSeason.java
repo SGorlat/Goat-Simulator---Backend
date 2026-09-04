@@ -46,4 +46,18 @@ public class CareerSeason {
 
     private Integer leaguePosition;
 
+    //@Transient le dice a JPA que NO los guarde en la tabla. Pero Lombok genera getters/setters y viene ne el JSON
+    @Transient
+    private Integer salaryGross;
+    @Transient
+    private Integer taxesPaid;
+    @Transient
+    private Integer rentPaid;
+    @Transient
+    private Integer lifestylePaid;
+    @Transient
+    private Integer agentPaid;
+    @Transient
+    private Integer salaryNet;
+
 }

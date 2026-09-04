@@ -1,12 +1,14 @@
 package com.goat.controller;
 
 import com.goat.dto.ChooseOptionRequest;
+import com.goat.dto.PreseasonPhase;
 import com.goat.dto.ShopItem;
 import com.goat.dto.TransferOffer;
 import com.goat.model.Career;
 import com.goat.model.CareerSeason;
 import com.goat.model.Event;
 import com.goat.model.EventOption;
+import com.goat.repository.CareerRepository;
 import com.goat.service.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,15 +24,17 @@ public class GameController {
     private final SimulationEngine simulationEngine; // Simula que pasa en la temporada
     private final GameService gameService; // para siguiiente turno
     private final ShopService shopService;
+    private final PreseasonService preseasonService;
 
 
-    public GameController(CareerService careerService,EventService eventService,TransferService transferService,SimulationEngine simulationEngine,GameService gameService,ShopService shopService){
+    public GameController(CareerService careerService,EventService eventService,TransferService transferService,SimulationEngine simulationEngine,GameService gameService,ShopService shopService,PreseasonService preseasonService){
         this.careerService = careerService;
         this.eventService = eventService;
         this.transferService = transferService;
         this.simulationEngine = simulationEngine;
         this.gameService = gameService;
         this.shopService = shopService;
+        this.preseasonService = preseasonService;
     }
 
     // GET - Siguiente turno
@@ -80,5 +84,15 @@ public List<ShopItem> getItems(@PathVariable Long id){
         return shopService.buyItem(careerId,itemId);
 }
 
+// GET - Traer fases y opciones
+@GetMapping("/preseason/{careerId}")
+    public List<PreseasonPhase> getPhases(@PathVariable Long careerId){
+        return preseasonService.getPhases(careerId);
+}
 
+// POST - Enviar opcion elegida
+@PostMapping("/preseason/{careerId}/{phaseId}/{optionId}")
+    public Career sendOption(@PathVariable Long careerId,@PathVariable String phaseId,@PathVariable String optionId){
+        return preseasonService.chooseOption(careerId,phaseId,optionId);
+}
 }

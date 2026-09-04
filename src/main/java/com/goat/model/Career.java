@@ -93,6 +93,8 @@ public class Career {
 
     private Integer contractYearsLeft = 0;
 
+    private int preseasonStep = 0; // 0=no empezada, 1=vacaciones hecha, 2=preparación hecha, 3=completa
+
     private LocalDateTime createdAt;
 
 
