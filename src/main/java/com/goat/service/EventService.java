@@ -152,6 +152,10 @@ public class EventService {
         career.setPressRelation(Math.min(100, career.getPressRelation()));
         career.setAgentRelation(Math.min(100, career.getAgentRelation()));
 
+        if(option.getFlag() != null && !(option.getFlag().isEmpty())){
+            career.addFlag(option.getFlag());
+        }
+
         // 4. Guardamos la carrera actualizada
         careerRepository.save(career);
 

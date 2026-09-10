@@ -61,8 +61,8 @@ public class Career {
     private Integer boardRelation = 50;      // directiva
 
     // Flags/careerHistory — memoria del juego para decisiones (JSON como String)
-    @Column(columnDefinition = "TEXT")
-    private String careerHistory = "{}";
+//    @Column(columnDefinition = "TEXT")
+//    private String careerHistory = "{}";
 
     @ManyToOne
     @JoinColumn(name = "position_id", nullable = false)
@@ -97,6 +97,27 @@ public class Career {
 
     private LocalDateTime createdAt;
 
+// FLAGS - para asociarlos a ofertas
+@Column(columnDefinition = "TEXT")
+private String flags = "";
 
+    // HELPER para añadir
+    public void addFlag(String flag) {
+        if (this.flags == null || this.flags.isEmpty()) {
+            this.flags = flag; // si esta vacia o es null el campo flag se añade
+        } else if (!this.flags.contains(flag)) {
+            this.flags = this.flags + "," + flag; // si no esta vacia miramos si la tenemos ya y sino se añade "," + flag
+        } // si la tenemos no se hace nada
+    }
+
+    // Devuelve true si hay flags y esta SI esta incluida
+    public boolean hasFlag(String flag) {
+        return this.flags != null && this.flags.contains(flag);
+    }
+
+    // limpiar flags a final de temporada
+    public void clearFlags(){
+        this.flags = "";
+    }
 
 }

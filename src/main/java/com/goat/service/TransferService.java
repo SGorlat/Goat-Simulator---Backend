@@ -3,6 +3,7 @@ package com.goat.service;
 import com.goat.dto.TransferOffer;
 import com.goat.model.Career;
 import com.goat.model.CareerSeason;
+import com.goat.model.League;
 import com.goat.model.Team;
 import com.goat.repository.CareerRepository;
 import com.goat.repository.CareerSeasonRepository;
@@ -152,6 +153,211 @@ public List<TransferOffer> generateOffer(Long careerId){
             offers.add(renewal);
         }
     }
+
+
+    // OFERTA DE TOP CLUB
+    if(career.hasFlag("interes_topclub")){
+        List<Team> teamsLvl3 = teamRepository.findByLeagueLevel(3);
+
+        // Si tengo equipo: Eliminamos mi equipo actual de la lista, elimiando aquellos cuyo id sea = al id de mi equipo actual
+        if(career.getCurrentTeam() != null){
+            teamsLvl3.removeIf(t -> t.getId().equals(career.getCurrentTeam().getId()));
+        }
+
+        // Escogemos un equipo aleat de la lista de lvl 3 TOP
+        if (!teamsLvl3.isEmpty()) {
+        Team topTeam = teamsLvl3.get(random.nextInt(teamsLvl3.size()));
+
+        TransferOffer offer = new TransferOffer(); // Creamos una oferta nueva vacía
+            offer.setTeamId(topTeam.getId()); // id del equipo
+            offer.setTeamName(topTeam.getName()); // nombre
+            offer.setLeagueName(topTeam.getLeague().getName()); // liga en la quie esta
+            offer.setLeagueLevel(topTeam.getLeague().getLevel());
+
+            int baseSalary = 2000000;
+            int offeredSalary = baseSalary + (topTeam.getPrestige() * 10000) + (career.getReputation() * 5000);
+            offer.setOfferedSalary(offeredSalary);
+
+            int myOverallRating = (career.getSpeed() + career.getTechnique() + career.getFinishing()
+                    + career.getPhysical() + career.getMental() + career.getVision()) / 6;
+
+            if (myOverallRating > topTeam.getPrestige() + 20) {
+                offer.setRole("Estrella");
+                offer.setContractYears(3 + random.nextInt(2));
+            } else if (myOverallRating > topTeam.getPrestige() + 5) {
+                offer.setRole("Titular");
+                offer.setContractYears(2 + random.nextInt(2));
+            } else if (myOverallRating > topTeam.getPrestige() - 10) {
+                offer.setRole("Rotación");
+                offer.setContractYears(1 + random.nextInt(2));
+            } else {
+                offer.setRole("Suplente");
+                offer.setContractYears(1);
+            }
+
+            offers.add(offer);
+        }
+    }
+
+
+    // OFERTA - INTERES DE UN CLUB DE X LIGA
+    if (career.hasFlag("interes_liga")) {
+        String leagueName = career.getFlags().split("interes_liga:")[1].split(",")[0];
+
+        // Comprobar que no juego ya en esa liga
+        boolean sameLeague = career.getCurrentTeam() != null
+                && career.getCurrentTeam().getLeague().getName().equals(leagueName);
+
+        if (!sameLeague) {
+            List<Team> teamsOfLeague = teamRepository.findByLeagueName(leagueName);
+
+            if (career.getCurrentTeam() != null) {
+                teamsOfLeague.removeIf(t -> t.getId().equals(career.getCurrentTeam().getId()));
+            }
+
+            if (!teamsOfLeague.isEmpty()) {
+                Team leagueTeam = teamsOfLeague.get(random.nextInt(teamsOfLeague.size()));
+
+                TransferOffer offer = new TransferOffer(); // Creamos una oferta nueva vacía
+                offer.setTeamId(leagueTeam.getId()); // id del equipo
+                offer.setTeamName(leagueTeam.getName()); // nombre
+                offer.setLeagueName(leagueTeam.getLeague().getName()); // liga en la quie esta
+                offer.setLeagueLevel(leagueTeam.getLeague().getLevel());
+
+                // Salario base según nivel de liga
+                int baseSalary;
+                if (leagueTeam.getLeague().getLevel() == 3) {
+                    baseSalary = 2000000;    // élite: base 2M
+                } else if (leagueTeam.getLeague().getLevel() == 2) {
+                    baseSalary = 500000;     // medio: base 500K
+                } else {
+                    baseSalary = 100000;     // bajo: base 100K
+                }
+
+                // El prestige y tu reputation ajustan hacia arriba
+                int offeredSalary = baseSalary + (leagueTeam.getPrestige() * 10000) + (career.getReputation() * 5000);
+
+                offer.setOfferedSalary(offeredSalary);
+
+                int myOverallRating = (career.getSpeed() + career.getTechnique() + career.getFinishing()
+                        + career.getPhysical() + career.getMental() + career.getVision()) / 6;
+
+                if (myOverallRating > leagueTeam.getPrestige() + 20) {
+                    offer.setRole("Estrella");
+                    offer.setContractYears(3 + random.nextInt(2));
+                } else if (myOverallRating > leagueTeam.getPrestige() + 5) {
+                    offer.setRole("Titular");
+                    offer.setContractYears(2 + random.nextInt(2));
+                } else if (myOverallRating > leagueTeam.getPrestige() - 10) {
+                    offer.setRole("Rotación");
+                    offer.setContractYears(1 + random.nextInt(2));
+                } else {
+                    offer.setRole("Suplente");
+                    offer.setContractYears(1);
+                }
+
+                offers.add(offer);
+
+            }
+        }
+    }
+
+
+    // INTERES EQUIPO CUALQUIERA
+    if (career.hasFlag("interes_equipo")){
+        String teamName = career.getFlags().split("interes_equipo:")[1].split(",")[0];
+
+        Team teamInterested = teamRepository.findByName(teamName);
+
+        if(teamInterested != null && (career.getCurrentTeam() == null || !teamInterested.getId().equals(career.getCurrentTeam().getId()))){
+
+            TransferOffer offer = new TransferOffer(); // Creamos una oferta nueva vacía
+            offer.setTeamId(teamInterested.getId()); // id del equipo
+            offer.setTeamName(teamInterested.getName()); // nombre
+            offer.setLeagueName(teamInterested.getLeague().getName()); // liga en la quie esta
+            offer.setLeagueLevel(teamInterested.getLeague().getLevel());
+
+            // Salario base según nivel de liga
+            int baseSalary;
+            if (teamInterested.getLeague().getLevel() == 3) {
+                baseSalary = 2000000;    // élite: base 2M
+            } else if (teamInterested.getLeague().getLevel() == 2) {
+                baseSalary = 500000;     // medio: base 500K
+            } else {
+                baseSalary = 100000;     // bajo: base 100K
+            }
+
+            // El prestige y tu reputation ajustan hacia arriba
+            int offeredSalary = baseSalary + (teamInterested.getPrestige() * 10000) + (career.getReputation() * 5000);
+
+            offer.setOfferedSalary(offeredSalary);
+
+            int myOverallRating = (career.getSpeed() + career.getTechnique() + career.getFinishing()
+                    + career.getPhysical() + career.getMental() + career.getVision()) / 6;
+
+            if (myOverallRating > teamInterested.getPrestige() + 20) {
+                offer.setRole("Estrella");
+                offer.setContractYears(3 + random.nextInt(2));
+            } else if (myOverallRating > teamInterested.getPrestige() + 5) {
+                offer.setRole("Titular");
+                offer.setContractYears(2 + random.nextInt(2));
+            } else if (myOverallRating > teamInterested.getPrestige() - 10) {
+                offer.setRole("Rotación");
+                offer.setContractYears(1 + random.nextInt(2));
+            } else {
+                offer.setRole("Suplente");
+                offer.setContractYears(1);
+            }
+
+            offers.add(offer);
+
+        }
+
+    }
+
+    // INTERES CESION (solo si eres Suplente o Rotación)
+    if (career.hasFlag("interes_cesion")) {
+        String currentRole = career.getCurrentRole();
+        if (currentRole != null && (currentRole.equals("Suplente") || currentRole.equals("Rotación"))) {
+
+            int currentLevel = career.getCurrentTeam().getLeague().getLevel();
+            int searchLevel = Math.max(1, currentLevel - 1); // BUSCAMOS NIVEL IGUAL O IONFERIOR A MI LIGA
+
+            List<Team> cessionTeams = teamRepository.findByLeagueLevel(searchLevel);
+
+            if (career.getCurrentTeam() != null) {
+                cessionTeams.removeIf(t -> t.getId().equals(career.getCurrentTeam().getId()));
+            }
+
+            if (!cessionTeams.isEmpty()) {
+                Team cessionTeam = cessionTeams.get(random.nextInt(cessionTeams.size()));
+
+                TransferOffer offer = new TransferOffer();
+                offer.setTeamId(cessionTeam.getId());
+                offer.setTeamName(cessionTeam.getName() + " (Cesión)");
+                offer.setLeagueName(cessionTeam.getLeague().getName());
+                offer.setLeagueLevel(cessionTeam.getLeague().getLevel());
+
+                int baseSalary;
+                if (cessionTeam.getLeague().getLevel() == 3) {
+                    baseSalary = 1000000;
+                } else if (cessionTeam.getLeague().getLevel() == 2) {
+                    baseSalary = 300000;
+                } else {
+                    baseSalary = 80000;
+                }
+
+                int offeredSalary = baseSalary + (cessionTeam.getPrestige() * 5000);
+                offer.setOfferedSalary(offeredSalary);
+                offer.setRole("Titular");
+                offer.setContractYears(1);
+
+                offers.add(offer);
+            }
+        }
+    }
+
+
 
     return offers;
 

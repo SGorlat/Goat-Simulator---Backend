@@ -39,7 +39,6 @@ public class EventOption {
     private Integer agentRelationMod = 0;
     private Integer boardRelationMod = 0;
 
-
     // Texto post evento
     @Column(nullable = false, columnDefinition = "TEXT")
     private String outcomeText;
@@ -48,4 +47,9 @@ public class EventOption {
     @JoinColumn(name = "event_id", nullable = false)
     @JsonIgnore // Para que no inclkuya el event padre en el JSON que devuelve
     private Event event;
+
+    private String flag;
+
 }
+
+

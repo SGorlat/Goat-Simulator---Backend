@@ -406,7 +406,7 @@ public class SimulationEngine {
                     career.setMental(career.getMental() + 1);
                 }
 
-      // Tras boiost reseteamnos items de la tienda para la siguiente temporada
+          // Tras boost reseteamnos items de la tienda para la siguiente temporada
                 career.setHasPhysio(false);
                 career.setHasNutritionist(false);
                 career.setHasPsychology(false);
@@ -416,8 +416,9 @@ public class SimulationEngine {
                 career.setHasVideoAnalyst(false);
                 career.setHasPrivateChef(false);
 
-                // reseteamos los pasos de pretemporada a 0(0 = vacaciones)
-        career.setPreseasonStep(0);
+            // reseteamos los pasos de pretemporada a 0(0 = vacaciones)
+            career.setPreseasonStep(0);
+            career.clearFlags(); // reseteamos las flags, marcas de intereses de equipos ocurridas duirante la temporada
 
 
             // Tope de stats a 99 si supera ese rango
