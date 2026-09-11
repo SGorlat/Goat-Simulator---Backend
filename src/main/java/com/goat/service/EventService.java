@@ -40,6 +40,10 @@ public class EventService {
             for (EventOption option : event.getOptions()) {
                 option.setText(option.getText().replace("{club}", clubName).replace("{topClub}", topClubName));
                 option.setOutcomeText(option.getOutcomeText().replace("{club}", clubName).replace("{topClub}", topClubName));
+
+                if (option.getFlag() != null) {
+                    option.setFlag(option.getFlag().replace("{club}", clubName).replace("{topClub}", topClubName));
+                }
             }
         }
     }

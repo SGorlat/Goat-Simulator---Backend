@@ -351,7 +351,7 @@ public class DataInitializer implements CommandLineRunner {
                     "Pasas de largo sin decir nada. Coges los calzoncillos y te vistes en silencio. Algunos te miran raro. Otros piensan: 'Este va a lo suyo.' No caes mal, pero tampoco caes bien.",
                     0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0);
 
-// A003 — Tu viejo antes del primer partido
+// A003 — Tu padre antes del primer partido
             Event a003 = footballDataService.createEvent(
                     "La charla de tu padre en el coche",
                     "Camino al campo, tu padre baja la radio y te suelta: 'Oye, me da igual si metes tres goles o si no la tocas. Lo que no quiero ver es que vayas con miedo. ¿Estamos?' Silencio. El semáforo se pone en verde.",
@@ -690,7 +690,8 @@ public class DataInitializer implements CommandLineRunner {
             footballDataService.createOption(a020,
                     "Hacer tu juego pero subir la intensidad un punto",
                     "Juegas como siempre pero con un extra de concentración. Ni te pasas ni te quedas corto. El ojeador no se levanta del asiento, pero apunta tu nombre dos veces.",
-                    0, 1, 0, 0, 1, 0, 2, 0, 1, 0, 0, 1, 0, 0);
+                    0, 1, 0, 0, 1, 0, 2, 0, 1, 0, 0, 1, 0, 0, "interes_equipo:{club}");
+
 
 // A021 — Rumor de ojeador
             Event a021 = footballDataService.createEvent(
@@ -720,7 +721,7 @@ public class DataInitializer implements CommandLineRunner {
             footballDataService.createOption(a022,
                     "Ir a la prueba y ver qué ofrecen",
                     "Tres días en otra ciudad deportiva. El nivel es otro. Vuelves con las ideas claras de dónde estás. Pero en tu club se enteran y el míster te trata con más distancia: 'Así que quieres irte, ¿eh?'",
-                    0, 1, 0, 0, 1, 0, 3, 0, -2, -2, 0, 0, 1, 0);
+                    0, 1, 0, 0, 1, 0, 3, 0, -2, -2, 0, 0, 1, 0, "interes_equipo:{club}");
             footballDataService.createOption(a022,
                     "Rechazar y quedarte en tu club",
                     "'No, gracias. Estoy bien aquí.' El director asiente sorprendido. En el vestuario la noticia corre y te ganas el respeto de todos. Pero te queda la duda: ¿era tu oportunidad y la has dejado escapar?",
@@ -743,7 +744,7 @@ public class DataInitializer implements CommandLineRunner {
             footballDataService.createOption(a023,
                     "Darlo todo para que la oferta llegue",
                     "La noticia te pone las pilas como nada en tu vida. Cada entreno es una final. Mejoras rápido pero estás tan tenso que en un partidillo le metes un codazo sin querer a un compañero. El míster te sienta.",
-                    0, 1, 1, -1, -1, 0, 3, 0, -1, -1, 0, 2, 1, 0);
+                    0, 1, 1, -1, -1, 0, 3, 0, -1, -1, 0, 2, 1, 0,"interes_topclub");
             footballDataService.createOption(a023,
                     "Contárselo a tus padres y gestionarlo en familia",
                     "Tu padre te dice que no cambies nada. Tu madre llora de emoción. La presión se comparte. No la eliminas, pero la llevas mejor.",
@@ -2345,7 +2346,7 @@ public class DataInitializer implements CommandLineRunner {
             footballDataService.createOption(d079,
                     "Aceptar la cesión y buscar minutos",
                     "Nuevo vestuario, nueva ciudad, nuevo míster. Cada sábado juegas. Y eso no tiene precio. Pero a mitad de temporada el club de cesión quiere ficharte y tu club de origen no quiere venderte. Te quedas en tierra de nadie.",
-                    0, 1, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 1, 0);
+                    0, 1, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, 1, 0, "interes_cesion");
             footballDataService.createOption(d079,
                     "Rechazarla y quedarte a pelear por tu sitio",
                     "Le dices que no. Prefieres luchar desde el banquillo. El director lo respeta pero te avisa: 'No sé si vas a jugar mucho.' En noviembre llevas tres partidos jugados. La decisión era valiente. ¿Era inteligente?",
@@ -3314,7 +3315,7 @@ public class DataInitializer implements CommandLineRunner {
                     "'Solo un día.' El reloj corre. En esas 24 horas aparece una llamada de otro club que nadie esperaba. La oferta es peor económicamente pero el proyecto es mejor. Ahora tienes dos opciones y cero tiempo. La presión máxima saca lo mejor o lo peor de ti.",
                     0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0);
 
-///////////////////////////////////////
+
 // F036 — Proyecto deportivo serio
             Event f036 = footballDataService.createEvent(
                     "No vienes a rellenar, vienes a construir",
@@ -3576,6 +3577,448 @@ public class DataInitializer implements CommandLineRunner {
                     "Pedir tiempo para pensarlo",
                     "'Necesito unos días.' El {topClub} te da 72 horas. Setenta y dos horas para tomar la decisión más grande de tu carrera. No duermes ninguna de las tres noches.",
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+        // eventos con flags
+            
+// DF001 — Ojeador de un top club
+            Event df001 = footballDataService.createEvent(
+                    "Un hombre con acreditación VIP te observa",
+                    "Tercer partido consecutivo que ves al mismo tipo en la grada VIP con una carpeta y el escudo de un grande en la solapa. Tu representante confirma: 'Es del {topClub}. Te están siguiendo en serio.'",
+                    "deportivo", "decision", "rare", "profesional", 18, 38, 2, 3, null
+            );
+            footballDataService.createOption(df001,
+                    "Jugar tu fútbol sin cambiar nada",
+                    "Si le gusta lo que eres, bien. Si no, que busque a otro. No vas a disfrazarte de algo que no eres. Pero el ojeador deja de venir después del cuarto partido. ¿Era bueno o malo que no cambiaras nada?",
+                    0, 0, 0, 0, 2, 0, 1, 0, 1, 0, 0, 0, 0, 0);
+            footballDataService.createOption(df001,
+                    "Subir tu nivel un punto para impresionar",
+                    "Cada partido con él en la grada juegas un poco más enchufado. Metes un golazo el tercer partido. El ojeador apunta tu nombre con bolígrafo rojo. Tu representante recibe una llamada esa misma noche.",
+                    0, 1, 1, 0, 0, 0, 3, 0, 0, 0, 0, 1, 1, 0,
+                    "interes_topclub");
+            footballDataService.createOption(df001,
+                    "Forzar jugadas espectaculares para lucirte",
+                    "Intentas tres bicicletas, un tiro desde 30 metros y un sombrero. Dos salen bien, una sale fatal. El ojeador apunta cosas. No sabes si buenas o malas.",
+                    0, 0, 1, 0, -1, 0, 2, 0, -1, 0, 0, 1, 0, 0);
+
+// DF002 — La Premier League pregunta
+            Event df002 = footballDataService.createEvent(
+                    "Noticias desde Inglaterra",
+                    "Tu representante te llama después del entrenamiento: 'Un club de la Premier League ha pedido un informe completo sobre ti. Quieren vídeos de los últimos diez partidos.' La Premier. El fútbol de verdad.",
+                    "deportivo", "decision", "rare", "profesional", 20, 38, 1, 3, null
+            );
+            footballDataService.createOption(df002,
+                    "Dejar que tu representante gestione todo",
+                    "Le das vía libre. Él manda los vídeos, negocia, tantea. Tú sigues jugando. Pero la espera te come por dentro y entrenas peor durante dos semanas.",
+                    0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_liga:Premier League");
+            footballDataService.createOption(df002,
+                    "Centrarte en rendir para que los vídeos impresionen",
+                    "Si van a ver tus últimos diez partidos, que los diez sean de matrícula. Sales enchufado cada semana. El nivel sube. Pero la presión autoimpuesta te agota.",
+                    0, 0, 1, -1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0,
+                    "interes_liga:Premier League");
+            footballDataService.createOption(df002,
+                    "No darle importancia hasta que haya algo concreto",
+                    "Informes piden muchos clubes. No significa nada hasta que hay una oferta. Sigues a lo tuyo. Tu representante se frustra: 'Si no muestras interés, no van a dar el paso.'",
+                    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, -1, -1);
+
+// DF003 — Interés desde Alemania
+            Event df003 = footballDataService.createEvent(
+                    "Alemania te tiene en el radar",
+                    "Tu representante te enseña un artículo de un medio deportivo alemán: tu nombre aparece en una lista de 'jóvenes a seguir' junto a otros cinco jugadores. Un club de la Bundesliga ha contactado.",
+                    "deportivo", "decision", "uncommon", "profesional", 18, 34, 1, 3, null
+            );
+            footballDataService.createOption(df003,
+                    "Pedir más información sobre el club y la liga",
+                    "Investigas. La Bundesliga apuesta por jóvenes, los estadios están llenos y el nivel táctico es alto. Te convence. Le dices a tu representante que mueva ficha.",
+                    0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_liga:Bundesliga");
+            footballDataService.createOption(df003,
+                    "No me veo fuera de mi país ahora mismo",
+                    "Alemania queda lejos. El idioma, la comida, el frío. No estás preparado. Pero un año después el jugador que ficharon en tu lugar debuta en Champions. Tú ves el partido desde casa.",
+                    0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, -1, 0);
+            footballDataService.createOption(df003,
+                    "Estar abierto pero sin mover nada todavía",
+                    "Le dices a tu representante que escuche pero no fuerce. Si llega una oferta concreta, la valoras. Si no, sigues donde estás.",
+                    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+// DF004 — Italia llama
+            Event df004 = footballDataService.createEvent(
+                    "Un club italiano pregunta por ti",
+                    "Tu representante te lo suelta en el coche después del entrenamiento: 'Hay un club de la Serie A que pregunta por ti. Italia. Buen fútbol, cultura táctica, y pasta.'",
+                    "deportivo", "decision", "uncommon", "profesional", 20, 38, 1, 3, null
+            );
+            footballDataService.createOption(df004,
+                    "Italia me atrae, que sigan hablando",
+                    "La Serie A tiene algo especial. Defensa, táctica, historia. Le dices a tu representante que mantenga la puerta abierta.",
+                    0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_liga:Serie A");
+            footballDataService.createOption(df004,
+                    "Prefiero quedarme donde estoy",
+                    "Italia queda lejos de casa. Prefieres seguir creciendo donde estás. Pero el club italiano ficha a un rival tuyo que triunfa en seis meses.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0);
+            footballDataService.createOption(df004,
+                    "Solo me iría a un club top italiano",
+                    "'Si es Juventus, Milan o Inter, hablamos. Si no, paso.' Tu representante: 'Eso reduce mucho las opciones.' Pero al menos sabes lo que quieres.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+// DF005 — Francia te busca
+            Event df005 = footballDataService.createEvent(
+                    "Desde Francia con interés",
+                    "Tu representante te manda un mensaje: 'Un club de la Ligue 1 ha contactado. No es el PSG pero es un club serio con proyecto europeo. ¿Hablamos?'",
+                    "deportivo", "decision", "uncommon", "profesional", 20, 38, 1, 3, null
+            );
+            footballDataService.createOption(df005,
+                    "Que me cuenten el proyecto",
+                    "Francia tiene su encanto. Buena liga, buen nivel de vida, y un fútbol que cada vez pesa más en Europa.",
+                    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_liga:Ligue 1");
+            footballDataService.createOption(df005,
+                    "No me interesa Francia",
+                    "No te ves jugando en la Ligue 1. Tu representante respeta la decisión sin insistir.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            footballDataService.createOption(df005,
+                    "Depende del salario y del rol",
+                    "No dices ni sí ni no. Quieres números concretos. Tu representante investiga y te pasa un informe. La oferta está bien pero no es espectacular.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
+
+// DF006 — Portugal como trampolín
+            Event df006 = footballDataService.createEvent(
+                    "Portugal como trampolín",
+                    "Tu representante te sienta: 'Tengo muy buena relación con un director deportivo de la Liga Portugal. Me ha dicho que buscan un perfil como el tuyo. Portugal es un trampolín — de ahí han salido jugadores que ahora están en el Real Madrid o en el City.'",
+                    "deportivo", "decision", "uncommon", "profesional", 18, 28, 1, 3, null
+            );
+            footballDataService.createOption(df006,
+                    "Me interesa, Portugal puede ser un buen paso",
+                    "La Liga Portugal ha exportado talento como pocos. Si rindes ahí, los grandes te ven.",
+                    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_liga:Liga Portugal");
+            footballDataService.createOption(df006,
+                    "Prefiero dar el salto a una liga más grande directamente",
+                    "Portugal te parece un paso intermedio. Quieres ir directo a las cinco grandes ligas. Pero tu representante te recuerda: 'No siempre puedes elegir el camino.'",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            footballDataService.createOption(df006,
+                    "Solo si es Benfica, Porto o Sporting",
+                    "'Los tres grandes o nada.' Tu representante asiente. Esos tres son los que más exportan. Pero también los más exigentes.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+// DF007 — Un equipo concreto te sigue
+            Event df007 = footballDataService.createEvent(
+                    "Un club te tiene en la agenda",
+                    "Tu representante te confirma que el {club} lleva semanas siguiéndote. Han hablado con tu entorno, han pedido informes y han visto tus últimos cinco partidos en persona.",
+                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+            );
+            footballDataService.createOption(df007,
+                    "Seguir rindiendo para que den el paso",
+                    "Si están interesados, tu trabajo es demostrar que merecen ficharte. Entrenas con más ganas. Los siguientes partidos son de los mejores de la temporada.",
+                    0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0,
+                    "interes_equipo:{club}");
+            footballDataService.createOption(df007,
+                    "Decirle a tu representante que fuerce el contacto",
+                    "'No quiero esperar. Que sepan que estoy interesado.' Tu representante llama. El club: 'Lo tenemos en cuenta.' Pero tu club actual se entera.",
+                    0, 0, 0, 0, 0, 0, 1, 0, -2, -1, 0, 0, 2, 0,
+                    "interes_equipo:{club}");
+            footballDataService.createOption(df007,
+                    "No mover nada y dejar que venga solo",
+                    "Si quieren venir, que vengan. No vas a suplicar. Pero a veces el que no se mueve se queda donde está.",
+                    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+// DF008 — El míster sugiere cesión
+            Event df008 = footballDataService.createEvent(
+                    "El míster te llama al despacho",
+                    "Cierra la puerta. Se sienta. 'Mira, voy a ser honesto contigo. Confío en ti, pero no puedo garantizarte los minutos que necesitas. Quizá te vendría bien salir cedido medio año para jugar cada semana y volver más hecho.'",
+                    "deportivo", "decision", "uncommon", "profesional", 18, 28, 1, 3, null
+            );
+            footballDataService.createOption(df008,
+                    "Aceptar la sugerencia, necesitas jugar",
+                    "El míster tiene razón. Sin minutos no creces. Pides a tu representante que busque una cesión. El míster te lo agradece: 'Vuelve hecho un jugador.'",
+                    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+                    "interes_cesion");
+            footballDataService.createOption(df008,
+                    "Rechazarlo y quedarte a pelear",
+                    "'No me voy, míster. Voy a ganarme el puesto aquí.' El entrenador asiente pero su cara dice que no lo ve claro. Los siguientes meses son una batalla contra el banquillo.",
+                    0, 0, 0, 0, 1, 0, -1, 0, 0, 1, 0, 0, 0, 0);
+            footballDataService.createOption(df008,
+                    "Pedir que te dé una oportunidad antes de decidir",
+                    "'Míster, ponme tres partidos seguidos. Si no rindo, me voy cedido.' Él acepta. Ahora tienes tres partidos para demostrar que mereces quedarte.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0);
+
+// DF009 — Artículo en prensa deportiva
+            Event df009 = footballDataService.createEvent(
+                    "Sales en la prensa como posible fichaje",
+                    "Un periodista deportivo publica un artículo: 'Cinco jugadores que deberían fichar los grandes este verano.' Tu nombre aparece en la lista. El artículo menciona al {topClub} como posible destino.",
+                    "deportivo", "decision", "rare", "profesional", 20, 38, 2, 3, null
+            );
+            footballDataService.createOption(df009,
+                    "No darle importancia, la prensa especula mucho",
+                    "Un artículo no es una oferta. Sigues a lo tuyo. Pero tres compañeros te mandan el link con emojis de fuego. La presión mediática sube un grado.",
+                    0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0);
+            footballDataService.createOption(df009,
+                    "Usarlo como motivación para rendir más",
+                    "Si los grandes te miran, que te vean en tu mejor versión. Los siguientes partidos subes el nivel. La prensa sigue hablando.",
+                    0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 2, 1, 0,
+                    "interes_topclub");
+            footballDataService.createOption(df009,
+                    "Pedirle a tu representante que confirme si hay interés real",
+                    "Tu representante hace llamadas. Confirma que sí, hay interés real de un grande. No es solo prensa. Tu corazón late más rápido.",
+                    0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 2, 0,
+                    "interes_topclub");
+
+// DF010 — Excompañero habla bien de ti
+            Event df010 = footballDataService.createEvent(
+                    "Tu excompañero te recomienda",
+                    "Un antiguo compañero de equipo que ahora juega en el {club} te llama: 'Tío, le he hablado de ti al director deportivo. Está interesado. ¿Quieres que le pase tu contacto?'",
+                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+            );
+            footballDataService.createOption(df010,
+                    "Sí, que le pase mi contacto",
+                    "Tu excompañero hace de puente. El director deportivo habla con tu representante. Las cosas se ponen en marcha gracias a una llamada entre amigos.",
+                    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_equipo:{club}");
+            footballDataService.createOption(df010,
+                    "Agradecerle pero no mover nada por ahora",
+                    "'Gracias tío, pero estoy bien donde estoy.' Tu amigo lo entiende. Pero la oportunidad queda en el aire.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            footballDataService.createOption(df010,
+                    "Pedirle que te cuente cómo es el club por dentro",
+                    "Antes de dar ningún paso, quieres saber la verdad. Tu amigo te lo cuenta todo: lo bueno y lo malo. La información vale oro.",
+                    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_equipo:{club}");
+
+// DF011 — Gol que sale en todos los resúmenes
+            Event df011 = footballDataService.createEvent(
+                    "Tu gol da la vuelta al mundo",
+                    "Golazo desde fuera del área que sale en todos los resúmenes europeos. Trending topic en redes. Tu nombre suena en tertulias de otros países. Tu representante no para de recibir mensajes.",
+                    "deportivo", "informativo", "rare", "profesional", 18, 38, 1, 3, null
+            );
+            footballDataService.createOption(df011,
+                    "Disfrutar el momento y seguir trabajando",
+                    "Un golazo no te convierte en estrella. Pero abre puertas. Tu representante filtra que hay llamadas de clubes importantes. ¿Será humo o algo real?",
+                    0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 1, 3, 1, 0,
+                    "interes_topclub");
+            footballDataService.createOption(df011,
+                    "Subir el gol a redes sociales y potenciar tu imagen",
+                    "El vídeo lo subes tú. Millones de reproducciones. Tu marca personal sube. Pero el míster te dice: 'Menos Instagram y más entrenamiento.'",
+                    0, 0, 0, 0, 0, 0, 4, 0, -1, 0, 2, 2, 1, 0,
+                    "interes_topclub");
+
+// DF012 — Selección sub-21 con ojeadores
+            Event df012 = footballDataService.createEvent(
+                    "Selección sub-21 con ojeadores en la grada",
+                    "Te convocan con la selección sub-21 para un amistoso. Tu representante te avisa: 'Va a haber ojeadores de media Europa. Es un escaparate perfecto.'",
+                    "deportivo", "decision", "rare", "profesional", 18, 24, 1, 3, null
+            );
+            footballDataService.createOption(df012,
+                    "Jugar con todo y aprovechar el escaparate",
+                    "Sales enchufado. Marcas un gol y das una asistencia. Tres clubes preguntan por ti esa misma noche. Tu representante no duerme atendiendo llamadas.",
+                    0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 0, 2, 2, 0,
+                    "interes_topclub");
+            footballDataService.createOption(df012,
+                    "Jugar seguro para no cometer errores",
+                    "No te la juegas. Partido correcto sin brillo. Los ojeadores apuntan otros nombres. A veces lo seguro es lo más peligroso.",
+                    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            footballDataService.createOption(df012,
+                    "Pedir no jugar por precaución con una molestia",
+                    "Tienes una pequeña molestia y prefieres no arriesgar. Te quedas en el banquillo. La molestia se cura. Pero la oportunidad de lucirte ante ojeadores se ha ido.",
+                    0, 0, 0, 1, 0, 0, -1, 0, 0, 0, 0, -1, 0, 0);
+
+// DF013 — Director deportivo te llama
+            Event df013 = footballDataService.createEvent(
+                    "Llamada de un director deportivo",
+                    "Tu representante te pasa una llamada directa del director deportivo del {club}: 'Quería hablar contigo personalmente. Nos gustas mucho y queremos que sepas que estamos siguiendo tu evolución de cerca.'",
+                    "deportivo", "decision", "rare", "profesional", 20, 38, 1, 3, null
+            );
+            footballDataService.createOption(df013,
+                    "Agradecerle y mostrar interés",
+                    "Una llamada directa del director deportivo es algo serio. No pasa todos los días. Le dices que te halaga y que estarías abierto a escuchar.",
+                    0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0,
+                    "interes_equipo:{club}");
+            footballDataService.createOption(df013,
+                    "Ser educado pero no comprometerte a nada",
+                    "Le agradeces la llamada pero no das ninguna señal. 'Ya veremos qué pasa.' El director deportivo entiende que no eres fácil.",
+                    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            footballDataService.createOption(df013,
+                    "Preguntarle directamente qué rol tendrías",
+                    "No te andas con rodeos: '¿Qué papel tendría yo ahí?' El director deportivo te da una respuesta concreta. Ahora tienes información real para decidir.",
+                    0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_equipo:{club}");
+
+// DF014 — Rumores en redes sociales
+            Event df014 = footballDataService.createEvent(
+                    "Tu nombre es tendencia",
+                    "Abres Twitter y tu nombre es trending topic. Un periodista fiable ha publicado: 'El {topClub} tiene en su agenda a [tu nombre] para la próxima ventana de fichajes.' Miles de comentarios. Tu teléfono no para.",
+                    "deportivo", "decision", "epic", "profesional", 20, 38, 2, 3, null
+            );
+            footballDataService.createOption(df014,
+                    "No entrar en redes y dejar que tu representante gestione",
+                    "Tu representante te dice que no publiques nada. Silencio es poder. Mientras tanto, él confirma por sus contactos que el interés es real.",
+                    0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 2, 2, 0,
+                    "interes_topclub");
+            footballDataService.createOption(df014,
+                    "Publicar un emoji ambiguo que alimente el rumor",
+                    "Un simple emoji de ojos o un reloj de arena. Las redes explotan con teorías. Tu club actual se molesta. Pero el {topClub} sabe que estás interesado.",
+                    0, 0, 0, 0, 0, 0, 3, 0, -2, -1, 0, 1, 2, 0,
+                    "interes_topclub");
+            footballDataService.createOption(df014,
+                    "Desmentirlo públicamente para no generar problemas",
+                    "Publicas: 'Estoy centrado en mi club y contento aquí.' Tu directiva respira. Pero el {topClub} lee tu mensaje y piensa: 'No le interesamos.' Puerta cerrada.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 1, -1, -2, 1);
+
+// DF015 — Amistoso revelador
+            Event df015 = footballDataService.createEvent(
+                    "Amistoso contra un equipo de otra liga",
+                    "Tu club juega un amistoso de pretemporada contra un equipo de otra liga. El rival tiene jugadores de nivel y el partido se televisa. Tu representante te avisa: 'Hay gente mirando.'",
+                    "deportivo", "decision", "uncommon", "profesional", 18, 38, 1, 3, null
+            );
+            footballDataService.createOption(df015,
+                    "Dar un recital y demostrar que estás para más",
+                    "Juegas como si fuera una final. Dos regates, una asistencia y un disparo al palo. El entrenador rival te dice al acabar: 'Buen jugador.' Eso vale más que cualquier estadística.",
+                    0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 1, 0,
+                    "interes_topclub");
+            footballDataService.createOption(df015,
+                    "Jugar tranquilo, es solo un amistoso",
+                    "No te la juegas en un amistoso de verano. Juegas correcto, sin riesgo. El partido pasa sin pena ni gloria.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            footballDataService.createOption(df015,
+                    "Buscar al mejor jugador rival y competir con él",
+                    "Te mides al central estrella del rival. Le ganas dos duelos, él te gana tres. Pero le has puesto las cosas difíciles y eso se nota.",
+                    0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0);
+
+// DF016 — Tu agente tiene un plan
+            Event df016 = footballDataService.createEvent(
+                    "Tu representante tiene un plan de carrera",
+                    "Tu representante te cita para comer: 'He estado pensando en tu trayectoria. Creo que tu próximo paso debería ser un grande de Europa. ¿Confías en mí?'",
+                    "deportivo", "decision", "rare", "profesional", 20, 38, 1, 3, null
+            );
+            footballDataService.createOption(df016,
+                    "Confiar en su plan y darle vía libre",
+                    "Tu representante empieza a mover hilos. Contacta con clubes, manda vídeos, habla con intermediarios. En tres semanas hay interés real de un grande.",
+                    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 1,
+                    "interes_topclub");
+            footballDataService.createOption(df016,
+                    "Quiero decidir yo mi futuro, no mi representante",
+                    "'Agradezco el interés, pero las decisiones las tomo yo.' Tu representante acepta pero se enfría un poco. La relación ya no es la misma.",
+                    0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, -1);
+            footballDataService.createOption(df016,
+                    "Preguntar qué clubs tiene en mente",
+                    "Antes de decidir nada, quieres saber los nombres. Tu representante suelta tres opciones. Una te ilusiona, otra te da miedo, la tercera te deja indiferente.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_topclub");
+
+// DF017 — Elogio del rival
+            Event df017 = footballDataService.createEvent(
+                    "Elogio inesperado del rival",
+                    "Después de un partido, el segundo entrenador del equipo rival se acerca a tu míster: 'Oye, el chaval ese vuestro es muy bueno. ¿Cuánto le queda de contrato?' Tu míster no le contesta. Pero te lo cuenta.",
+                    "deportivo", "informativo", "uncommon", "profesional", 18, 38, 1, 3, null
+            );
+            footballDataService.createOption(df017,
+                    "Tomarlo como un halago y seguir trabajando",
+                    "Que un técnico rival pregunte por ti es señal de que estás haciendo bien las cosas. Pero también de que tu club podría perderte si no te cuida.",
+                    0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_equipo:{club}");
+            footballDataService.createOption(df017,
+                    "Usarlo para negociar una mejora con tu club",
+                    "Le dices a tu representante que use esa información para presionar una renovación. 'Si otros preguntan, mi club debería valorarme más.'",
+                    0, 0, 0, 0, 0, 0, 0, 0, -1, 0, 0, 0, 1, 0);
+
+// DF018 — LaLiga te quiere
+            Event df018 = footballDataService.createEvent(
+                    "LaLiga te quiere",
+                    "Tu representante te llama emocionado: 'Un club de LaLiga ha preguntado por ti. España. Sol, buen fútbol y una liga que todo el mundo ve.'",
+                    "deportivo", "decision", "rare", "profesional", 20, 38, 1, 3, null
+            );
+            footballDataService.createOption(df018,
+                    "España me encanta, que avancen",
+                    "LaLiga siempre ha sido tu sueño. El fútbol español es técnico, táctico y mediático. Le dices a tu representante que dé el paso.",
+                    0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 2, 0,
+                    "interes_liga:Primera Division");
+            footballDataService.createOption(df018,
+                    "Depende de qué club sea",
+                    "No es lo mismo ir al Barça que al Celta. Quieres saber nombres antes de ilusionarte.",
+                    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_liga:Primera Division");
+            footballDataService.createOption(df018,
+                    "No me veo cambiando de liga ahora",
+                    "Estás cómodo donde estás. España puede esperar. Pero España no siempre espera.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0);
+
+// DF019 — Se filtra que no has renovado
+            Event df019 = footballDataService.createEvent(
+                    "Se filtra que no has renovado",
+                    "La prensa publica que tu contrato acaba pronto y que las negociaciones están paradas. De repente, tres clubes que nunca habían preguntado por ti contactan con tu representante.",
+                    "deportivo", "informativo", "uncommon", "profesional", 20, 38, 1, 3, null
+            );
+            footballDataService.createOption(df019,
+                    "Dejar que compitan por ti, es tu momento de poder",
+                    "Cuando eres libre, tú mandas. Los clubes vienen a ti. Tu representante gestiona. Pero tu club actual te aparta del equipo.",
+                    0, 0, 0, 0, 0, 0, 2, 0, -2, -1, -1, 1, 3, -2,
+                    "interes_topclub");
+            footballDataService.createOption(df019,
+                    "Intentar renovar antes de que sea tarde",
+                    "No quieres irte. Hablas con la directiva. Encuentran un acuerdo. Pero has perdido poder de negociación porque todos saben que quieres quedarte.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, -1, 1);
+            footballDataService.createOption(df019,
+                    "No hacer nada y dejar que el mercado decida",
+                    "Ni fuerzas ni frenas. Que lo que tenga que pasar, pase. Es la estrategia del que confía en su talento. O la del que tiene miedo de decidir.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
+
+// DF020 — Compañero cedido te dice que hay hueco
+            Event df020 = footballDataService.createEvent(
+                    "Un compañero cedido te llama",
+                    "Un compañero que está cedido en otro equipo te llama: 'Tío, aquí necesitan a alguien en tu posición. Se lo he dicho al míster y está interesado. ¿Quieres que hable?'",
+                    "deportivo", "decision", "uncommon", "profesional", 18, 28, 1, 3, null
+            );
+            footballDataService.createOption(df020,
+                    "Sí, que hable, necesito minutos",
+                    "Tu compañero hace de intermediario. El club cedente se interesa. Tu representante confirma que hay una opción real de cesión.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_cesion");
+            footballDataService.createOption(df020,
+                    "No, prefiero quedarme a competir aquí",
+                    "Agradeces pero rechazas. Quieres ganarte el puesto donde estás. Tu compañero: 'Vale, pero piénsatelo, aquí jugarías todos los fines de semana.'",
+                    0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0);
+            footballDataService.createOption(df020,
+                    "Investigar primero qué club es y qué nivel tiene",
+                    "Antes de decir sí, quieres saber dónde irías. Tu compañero te cuenta todo. El nivel es correcto, los minutos garantizados.",
+                    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_cesion");
+
+// DF021 — Partido televisado en prime time
+            Event df021 = footballDataService.createEvent(
+                    "Partido televisado en prime time",
+                    "Tu partido se televisa en horario estelar a todo el país. Millones de espectadores. El comentarista repite tu nombre varias veces. Al día siguiente, tu representante tiene el teléfono lleno de mensajes.",
+                    "deportivo", "informativo", "uncommon", "profesional", 18, 38, 1, 3, null
+            );
+            footballDataService.createOption(df021,
+                    "Ha sido solo un partido, no me vuelvo loco",
+                    "Un buen partido no te convierte en estrella. Pero abre puertas. Tu representante confirma que hay consultas de varios clubes.",
+                    0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 2, 1, 0,
+                    "interes_topclub");
+            footballDataService.createOption(df021,
+                    "Aprovechar la visibilidad para pedir una mejora a tu club",
+                    "Si otros te valoran, tu club debería valorarte más. Le pides a tu representante que negocie. La directiva se lo piensa.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0);
+
+// DF022 — Holanda como trampolín
+            Event df022 = footballDataService.createEvent(
+                    "Países Bajos: la fábrica de talento",
+                    "Tu representante te comenta: 'Hay interés de un club de la Eredivisie. Holanda es una fábrica de talento — de ahí salen jugadores a las cinco grandes ligas cada verano.'",
+                    "deportivo", "decision", "uncommon", "profesional", 18, 30, 1, 3, null
+            );
+            footballDataService.createOption(df022,
+                    "Holanda puede ser un gran paso intermedio",
+                    "Ajax, PSV, Feyenoord... clubes con historia que desarrollan jugadores. Si rindes ahí, los grandes de Europa te ven.",
+                    0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_liga:Eredivisie");
+            footballDataService.createOption(df022,
+                    "Prefiero una liga de las cinco grandes directamente",
+                    "Holanda está bien pero quieres ir directamente a Premier, LaLiga, Bundesliga, Serie A o Ligue 1. No quieres pasos intermedios.",
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+            footballDataService.createOption(df022,
+                    "Investigar qué club es antes de decidir",
+                    "No es lo mismo ir al Ajax que a un club pequeño. Quieres nombres antes de dar el paso.",
+                    0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+                    "interes_liga:Eredivisie");
+
         }
 }
 

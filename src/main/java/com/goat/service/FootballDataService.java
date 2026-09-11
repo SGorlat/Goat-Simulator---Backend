@@ -164,7 +164,7 @@ public class FootballDataService {
     }
 
         // Helper para la creacion de opciones en las decisiones
-    public void createOption(Event event, String text, String outcomeText,
+    public EventOption createOption(Event event, String text, String outcomeText,
                              int speedMod, int techniqueMod, int finishingMod,
                              int physicalMod, int mentalMod, int visionMod,
                              int reputationMod, int savingsMod,
@@ -194,9 +194,42 @@ public class FootballDataService {
 
         eventOptionRepository.save(eventOption);
 
-
+        return eventOption;
 
     }
+
+    // SOBRECARGA - MISMO METODO PARA CUANDO LLEVA FLAGS
+    public void createOption(Event event, String text, String outcomeText,
+                             int speedMod, int techniqueMod, int finishingMod,
+                             int physicalMod, int mentalMod, int visionMod,
+                             int reputationMod, int savingsMod,
+                             int coachRelMod, int teamRelMod, int fansRelMod,
+                             int pressRelMod, int agentRelMod, int boardRelMod,
+                             String flag) {
+
+        EventOption eventOption = new EventOption();
+        eventOption.setEvent(event);
+        eventOption.setText(text);
+        eventOption.setOutcomeText(outcomeText);
+        eventOption.setSpeedMod(speedMod);
+        eventOption.setTechniqueMod(techniqueMod);
+        eventOption.setFinishingMod(finishingMod);
+        eventOption.setMentalMod(mentalMod);
+        eventOption.setPhysicalMod(physicalMod);
+        eventOption.setVisionMod(visionMod);
+        eventOption.setReputationMod(reputationMod);
+        eventOption.setSavingsMod(savingsMod);
+        eventOption.setCoachRelationMod(coachRelMod);
+        eventOption.setTeamRelationMod(teamRelMod);
+        eventOption.setFansRelationMod(fansRelMod);
+        eventOption.setPressRelationMod(pressRelMod);
+        eventOption.setAgentRelationMod(agentRelMod);
+        eventOption.setBoardRelationMod(boardRelMod);
+        eventOption.setFlag(flag);
+
+        eventOptionRepository.save(eventOption);
+    }
+
 
 
 }
