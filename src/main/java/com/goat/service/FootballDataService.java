@@ -163,6 +163,36 @@ public class FootballDataService {
 
     }
 
+
+    // SOBRECARGA - MISMO METODO PARA CUANDO LLEVA MINIJUEGO
+    public Event createEvent(String title, String description, String category,
+                             String type, String rarity, String phase,
+                             int minAge, int maxAge, int minLeagueLevel, int maxLeagueLevel, Long unlocksEventId, String minigame){
+
+        Event event = new Event();
+
+        event.setTitle(title);
+        event.setDescription(description);
+        event.setCategory(category);
+        event.setRarity(rarity);
+        event.setPhase(phase);
+        event.setMinAge(minAge);
+        event.setMaxAge(maxAge);
+        event.setMinLeagueLevel(minLeagueLevel);
+        event.setMaxLeagueLevel(maxLeagueLevel);
+        event.setUnlocksEventId(unlocksEventId);
+        event.setType(type);
+        event.setMinigame(minigame);
+
+        // Guarda y devuelve el evento creado con su id vpara luego asociarlo a opciones
+        return eventRepository.save(event);
+
+    }
+
+
+
+
+
         // Helper para la creacion de opciones en las decisiones
     public EventOption createOption(Event event, String text, String outcomeText,
                              int speedMod, int techniqueMod, int finishingMod,
@@ -229,6 +259,8 @@ public class FootballDataService {
 
         eventOptionRepository.save(eventOption);
     }
+
+
 
 
 

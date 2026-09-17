@@ -32,6 +32,7 @@ public TransferService(CareerRepository careerRepository,CareerSeasonRepository 
 }
 
 
+
 // Genera lista de ofertas
 public List<TransferOffer> generateOffer(Long careerId){
 
@@ -66,10 +67,17 @@ public List<TransferOffer> generateOffer(Long careerId){
     }else{
         lvlOffer = 1;
      }
+
+    //
+    if(career.getCurrentAge() > 35){
+        lvlOffer = 1;
+    }else if(career.getCurrentAge() > 32){
+        lvlOffer = Math.max(1,lvlOffer - 1);
+    }
+
     }
 
     // Buscar equipo del lvl correspondiente - lista de equipos disponibles
-
     List<Team> teams = teamRepository.findByLeagueLevel(lvlOffer);
 
         // Si tengo equipo: Eliminamos mi equipo actual de la lista, elimiando aquellos cuyo id sea = al id de mi equipo actual
@@ -88,71 +96,11 @@ public List<TransferOffer> generateOffer(Long careerId){
         Team team = teams.get(random.nextInt(teams.size())); // Elegimos un equipo aleatorio de la lista
         teams.remove(team); // Lo quitamos de la lista para que no salga dos veces
 
-        TransferOffer offer = new TransferOffer(); // Creamos una oferta nueva vacía
-        offer.setTeamId(team.getId()); // id del equipo
-        offer.setTeamName(team.getName()); // nombre
-        offer.setLeagueName(team.getLeague().getName()); // liga en la quie esta
-        offer.setLeagueLevel(team.getLeague().getLevel()); // nivel liga
-
-
-        // Salario base según nivel de liga
-        int baseSalary;
-        if (team.getLeague().getLevel() == 3) {
-            baseSalary = 2000000;    // élite: base 2M
-        } else if (team.getLeague().getLevel() == 2) {
-            baseSalary = 500000;     // medio: base 500K
-        } else {
-            baseSalary = 100000;     // bajo: base 100K
-        }
-
-        // El prestige y tu reputation ajustan hacia arriba
-        int offeredSalary = baseSalary + (team.getPrestige() * 10000) + (career.getReputation() * 5000);
-
-        offer.setOfferedSalary(offeredSalary);
-
-        // Rol — segun si mi OVR es >< que el prestige del equipo me dan rol
-        int myOverallRating = (career.getSpeed() + career.getTechnique() + career.getFinishing()
-                + career.getPhysical() + career.getMental() + career.getVision()) / 6;
-
-        if (myOverallRating > team.getPrestige() + 20) {
-            offer.setRole("Estrella");
-        } else if (myOverallRating > team.getPrestige() + 5) {
-            offer.setRole("Titular");
-        } else if (myOverallRating > team.getPrestige() - 10) {
-            offer.setRole("Rotación");
-        } else {
-            offer.setRole("Suplente");
-        }
-
-        // AÑOS CONTRATO, cuanto mejor rol mas años ofrecen
-        if (offer.getRole().equals("Estrella")) {
-            offer.setContractYears(3 + random.nextInt(2));    // 3-4 años
-        } else if (offer.getRole().equals("Titular")) {
-            offer.setContractYears(2 + random.nextInt(2));    // 2-3 años
-        } else if (offer.getRole().equals("Rotación")) {
-            offer.setContractYears(1 + random.nextInt(2));    // 1-2 años
-        } else {
-            offer.setContractYears(1);                         // 1 año
-        }
+        TransferOffer offer = buildOffer(team, career, random);
 
         offers.add(offer); // añadimos la oferta a la lista de ofertas
     }
 
-// RENOVACION si queda 1 año o menos
-    if(career.getContractYearsLeft() <=1){
-        Team currentTeam = career.getCurrentTeam();         //Obtenemos equipo actual
-        if(currentTeam != null){ // enm academia no se renueva
-            TransferOffer renewal = new TransferOffer(); // Creamos oferta con los datos
-            renewal.setTeamName(currentTeam.getName() + (" (Renovación de contrato)"));
-            renewal.setTeamId(currentTeam.getId());
-            renewal.setLeagueName(currentTeam.getLeague().getName());
-            renewal.setLeagueLevel(currentTeam.getLeague().getLevel());
-            renewal.setOfferedSalary(career.getSalary() + (career.getReputation() * 100)); // salario actual + plus de renovacion
-            renewal.setRole(career.getCurrentRole());
-            renewal.setContractYears(2 + random.nextInt(2)); // 2-3 años 
-            offers.add(renewal);
-        }
-    }
 
 
     // OFERTA DE TOP CLUB
@@ -168,32 +116,7 @@ public List<TransferOffer> generateOffer(Long careerId){
         if (!teamsLvl3.isEmpty()) {
         Team topTeam = teamsLvl3.get(random.nextInt(teamsLvl3.size()));
 
-        TransferOffer offer = new TransferOffer(); // Creamos una oferta nueva vacía
-            offer.setTeamId(topTeam.getId()); // id del equipo
-            offer.setTeamName(topTeam.getName()); // nombre
-            offer.setLeagueName(topTeam.getLeague().getName()); // liga en la quie esta
-            offer.setLeagueLevel(topTeam.getLeague().getLevel());
-
-            int baseSalary = 2000000;
-            int offeredSalary = baseSalary + (topTeam.getPrestige() * 10000) + (career.getReputation() * 5000);
-            offer.setOfferedSalary(offeredSalary);
-
-            int myOverallRating = (career.getSpeed() + career.getTechnique() + career.getFinishing()
-                    + career.getPhysical() + career.getMental() + career.getVision()) / 6;
-
-            if (myOverallRating > topTeam.getPrestige() + 20) {
-                offer.setRole("Estrella");
-                offer.setContractYears(3 + random.nextInt(2));
-            } else if (myOverallRating > topTeam.getPrestige() + 5) {
-                offer.setRole("Titular");
-                offer.setContractYears(2 + random.nextInt(2));
-            } else if (myOverallRating > topTeam.getPrestige() - 10) {
-                offer.setRole("Rotación");
-                offer.setContractYears(1 + random.nextInt(2));
-            } else {
-                offer.setRole("Suplente");
-                offer.setContractYears(1);
-            }
+            TransferOffer offer = buildOffer(topTeam, career, random);
 
             offers.add(offer);
         }
@@ -218,43 +141,7 @@ public List<TransferOffer> generateOffer(Long careerId){
             if (!teamsOfLeague.isEmpty()) {
                 Team leagueTeam = teamsOfLeague.get(random.nextInt(teamsOfLeague.size()));
 
-                TransferOffer offer = new TransferOffer(); // Creamos una oferta nueva vacía
-                offer.setTeamId(leagueTeam.getId()); // id del equipo
-                offer.setTeamName(leagueTeam.getName()); // nombre
-                offer.setLeagueName(leagueTeam.getLeague().getName()); // liga en la quie esta
-                offer.setLeagueLevel(leagueTeam.getLeague().getLevel());
-
-                // Salario base según nivel de liga
-                int baseSalary;
-                if (leagueTeam.getLeague().getLevel() == 3) {
-                    baseSalary = 2000000;    // élite: base 2M
-                } else if (leagueTeam.getLeague().getLevel() == 2) {
-                    baseSalary = 500000;     // medio: base 500K
-                } else {
-                    baseSalary = 100000;     // bajo: base 100K
-                }
-
-                // El prestige y tu reputation ajustan hacia arriba
-                int offeredSalary = baseSalary + (leagueTeam.getPrestige() * 10000) + (career.getReputation() * 5000);
-
-                offer.setOfferedSalary(offeredSalary);
-
-                int myOverallRating = (career.getSpeed() + career.getTechnique() + career.getFinishing()
-                        + career.getPhysical() + career.getMental() + career.getVision()) / 6;
-
-                if (myOverallRating > leagueTeam.getPrestige() + 20) {
-                    offer.setRole("Estrella");
-                    offer.setContractYears(3 + random.nextInt(2));
-                } else if (myOverallRating > leagueTeam.getPrestige() + 5) {
-                    offer.setRole("Titular");
-                    offer.setContractYears(2 + random.nextInt(2));
-                } else if (myOverallRating > leagueTeam.getPrestige() - 10) {
-                    offer.setRole("Rotación");
-                    offer.setContractYears(1 + random.nextInt(2));
-                } else {
-                    offer.setRole("Suplente");
-                    offer.setContractYears(1);
-                }
+                TransferOffer offer = buildOffer(leagueTeam, career, random);
 
                 offers.add(offer);
 
@@ -271,43 +158,7 @@ public List<TransferOffer> generateOffer(Long careerId){
 
         if(teamInterested != null && (career.getCurrentTeam() == null || !teamInterested.getId().equals(career.getCurrentTeam().getId()))){
 
-            TransferOffer offer = new TransferOffer(); // Creamos una oferta nueva vacía
-            offer.setTeamId(teamInterested.getId()); // id del equipo
-            offer.setTeamName(teamInterested.getName()); // nombre
-            offer.setLeagueName(teamInterested.getLeague().getName()); // liga en la quie esta
-            offer.setLeagueLevel(teamInterested.getLeague().getLevel());
-
-            // Salario base según nivel de liga
-            int baseSalary;
-            if (teamInterested.getLeague().getLevel() == 3) {
-                baseSalary = 2000000;    // élite: base 2M
-            } else if (teamInterested.getLeague().getLevel() == 2) {
-                baseSalary = 500000;     // medio: base 500K
-            } else {
-                baseSalary = 100000;     // bajo: base 100K
-            }
-
-            // El prestige y tu reputation ajustan hacia arriba
-            int offeredSalary = baseSalary + (teamInterested.getPrestige() * 10000) + (career.getReputation() * 5000);
-
-            offer.setOfferedSalary(offeredSalary);
-
-            int myOverallRating = (career.getSpeed() + career.getTechnique() + career.getFinishing()
-                    + career.getPhysical() + career.getMental() + career.getVision()) / 6;
-
-            if (myOverallRating > teamInterested.getPrestige() + 20) {
-                offer.setRole("Estrella");
-                offer.setContractYears(3 + random.nextInt(2));
-            } else if (myOverallRating > teamInterested.getPrestige() + 5) {
-                offer.setRole("Titular");
-                offer.setContractYears(2 + random.nextInt(2));
-            } else if (myOverallRating > teamInterested.getPrestige() - 10) {
-                offer.setRole("Rotación");
-                offer.setContractYears(1 + random.nextInt(2));
-            } else {
-                offer.setRole("Suplente");
-                offer.setContractYears(1);
-            }
+            TransferOffer offer = buildOffer(teamInterested, career, random);
 
             offers.add(offer);
 
@@ -332,25 +183,20 @@ public List<TransferOffer> generateOffer(Long careerId){
             if (!cessionTeams.isEmpty()) {
                 Team cessionTeam = cessionTeams.get(random.nextInt(cessionTeams.size()));
 
-                TransferOffer offer = new TransferOffer();
-                offer.setTeamId(cessionTeam.getId());
-                offer.setTeamName(cessionTeam.getName() + " (Cesión)");
-                offer.setLeagueName(cessionTeam.getLeague().getName());
-                offer.setLeagueLevel(cessionTeam.getLeague().getLevel());
-
-                int baseSalary;
-                if (cessionTeam.getLeague().getLevel() == 3) {
-                    baseSalary = 1000000;
-                } else if (cessionTeam.getLeague().getLevel() == 2) {
-                    baseSalary = 300000;
-                } else {
-                    baseSalary = 80000;
-                }
-
-                int offeredSalary = baseSalary + (cessionTeam.getPrestige() * 5000);
-                offer.setOfferedSalary(offeredSalary);
+                TransferOffer offer = buildOffer(cessionTeam, career, random);
+                offer.setTeamName(offer.getTeamName() + " (Cesión)");
                 offer.setRole("Titular");
                 offer.setContractYears(1);
+
+                int baseSalaryCesion;
+                if (cessionTeam.getLeague().getLevel() == 3) {
+                    baseSalaryCesion = 1000000;
+                } else if (cessionTeam.getLeague().getLevel() == 2) {
+                    baseSalaryCesion = 300000;
+                } else {
+                    baseSalaryCesion = 80000;
+                }
+                offer.setOfferedSalary(baseSalaryCesion + (cessionTeam.getPrestige() * 5000));
 
                 offers.add(offer);
             }
@@ -362,6 +208,60 @@ public List<TransferOffer> generateOffer(Long careerId){
     return offers;
 
 }
+
+// HELPER PARA OFERTAS
+    private TransferOffer buildOffer(Team team, Career career, Random random){
+
+        TransferOffer offer = new TransferOffer(); // Creamos una oferta nueva vacía
+        offer.setTeamId(team.getId()); // id del equipo
+        offer.setTeamName(team.getName()); // nombre
+        offer.setLeagueName(team.getLeague().getName()); // liga en la quie esta
+        offer.setLeagueLevel(team.getLeague().getLevel());
+
+        // Salario base según nivel de liga
+        int baseSalary;
+        if (team.getLeague().getLevel() == 3) {
+            baseSalary = 2000000;    // élite: base 2M
+        } else if (team.getLeague().getLevel() == 2) {
+            baseSalary = 500000;     // medio: base 500K
+        } else {
+            baseSalary = 100000;     // bajo: base 100K
+        }
+
+        // El prestige y tu reputation ajustan hacia arriba
+        double prestigeMultiplier = 0.5 + (team.getPrestige() / 100.0);
+        double reputationMultiplier = 0.5 + (career.getReputation() / 100.0);
+
+        int offeredSalary = (int)(baseSalary * prestigeMultiplier * reputationMultiplier);
+        offer.setOfferedSalary(offeredSalary);
+
+        int myOverallRating = (career.getSpeed() + career.getTechnique() + career.getFinishing()
+                + career.getPhysical() + career.getMental() + career.getVision()) / 6;
+
+        if (myOverallRating > team.getPrestige() + 20) {
+            offer.setRole("Estrella");
+            offer.setContractYears(3 + random.nextInt(2));
+        } else if (myOverallRating > team.getPrestige() + 5) {
+            offer.setRole("Titular");
+            offer.setContractYears(2 + random.nextInt(2));
+        } else if (myOverallRating > team.getPrestige() - 10) {
+            offer.setRole("Rotación");
+            offer.setContractYears(1 + random.nextInt(2));
+        } else {
+            offer.setRole("Suplente");
+            offer.setContractYears(1);
+        }
+
+        // Si tiene menos de 24 años el minimo de años ofrecidos será de 2
+        if(career.getCurrentAge() < 24){
+            offer.setContractYears(Math.max(2,offer.getContractYears())); //2 o los que ofertasen
+        }
+
+return offer;
+
+    }
+
+
 
     public Career acceptOffer(Long careerId, TransferOffer offer) {
 
@@ -394,5 +294,29 @@ public List<TransferOffer> generateOffer(Long careerId){
 
         return careerRepository.save(career);
     }
+
+
+    // RENOVACION si queda 1 año o menos
+    public TransferOffer generateRenewal(Long careerId){
+
+        Career myCareer = careerRepository.findById(careerId).orElseThrow(() -> new RuntimeException("Carrera no encontrada"));
+
+        Random random = new Random();
+
+        if(myCareer.getCurrentTeam() != null){
+            TransferOffer renewal = buildOffer(myCareer.getCurrentTeam(), myCareer, random);
+            renewal.setTeamName(myCareer.getCurrentTeam().getName() + " (Renovación de contrato)");
+            renewal.setOfferedSalary(myCareer.getSalary() + (myCareer.getReputation() * 100));
+            renewal.setRole(myCareer.getCurrentRole());
+            renewal.setContractYears(2 + random.nextInt(2));
+
+            return renewal;
+        }else{
+            return null;
+        }
+
+    }
+
+
 
 }

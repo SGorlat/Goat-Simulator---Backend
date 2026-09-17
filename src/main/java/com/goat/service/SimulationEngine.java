@@ -172,12 +172,12 @@ public class SimulationEngine {
 
             // si la edad es mayor que 30 solo sube 1 o 2
             if (comp.getAge() > 30) {
-                comp.setFinishing(comp.getFinishing() - (randomNum.nextInt(2) + 1));
-                comp.setSpeed(comp.getSpeed() - (randomNum.nextInt(2) + 1));
-                comp.setTechnique(comp.getTechnique() - (randomNum.nextInt(2) + 1));
-                comp.setVision(comp.getVision() - (randomNum.nextInt(2) + 1));
-                comp.setPhysical(comp.getPhysical() - (randomNum.nextInt(2) + 1));
-                comp.setMental(comp.getMental() - (randomNum.nextInt(2) + 1));
+                comp.setFinishing(Math.max(1,comp.getFinishing() - (randomNum.nextInt(2) + 1)));
+                comp.setSpeed(Math.max(1,comp.getSpeed() - (randomNum.nextInt(2) + 1)));
+                comp.setTechnique(Math.max(1,comp.getTechnique() - (randomNum.nextInt(2) + 1)));
+                comp.setVision(Math.max(1,comp.getVision() - (randomNum.nextInt(2) + 1)));
+                comp.setPhysical(Math.max(1,comp.getPhysical() - (randomNum.nextInt(2) + 1)));
+                comp.setMental(Math.max(1,comp.getMental() - (randomNum.nextInt(2) + 1)));
             }
 
             // Goles/asist que marcan en base a su stats + aleat
@@ -351,6 +351,10 @@ public class SimulationEngine {
             // Premios
             List<String> awards = evaluateAwards(career, goals, assists);
 
+            if(leaguePosition == 1){
+                awards.add("¡Campeón de " + career.getCurrentTeam().getLeague().getName() + "!");
+            }
+
             // Crecimiento automático del jugador según su growthMultiplier
                     int playerGrowth = (int)(3 * career.getGrowthMultiplier());
                     career.setSpeed(career.getSpeed() + playerGrowth);
@@ -363,12 +367,12 @@ public class SimulationEngine {
             // Degradación de stats si mayor de 30 (igual que competidores)
                     if (career.getCurrentAge() > 30) {
                         Random random = new Random();
-                        career.setSpeed(career.getSpeed() - (random.nextInt(2) + 1));
-                        career.setTechnique(career.getTechnique() - (random.nextInt(2) + 1));
-                        career.setFinishing(career.getFinishing() - (random.nextInt(2) + 1));
-                        career.setPhysical(career.getPhysical() - (random.nextInt(2) + 1));
-                        career.setMental(career.getMental() - (random.nextInt(2) + 1));
-                        career.setVision(career.getVision() - (random.nextInt(2) + 1));
+                        career.setSpeed(Math.max(1,career.getSpeed() - (random.nextInt(2) + 1)));
+                        career.setTechnique(Math.max(1,career.getTechnique() - (random.nextInt(2) + 1)));
+                        career.setFinishing(Math.max(1,career.getFinishing() - (random.nextInt(2) + 1)));
+                        career.setPhysical(Math.max(1,career.getPhysical() - (random.nextInt(2) + 1)));
+                        career.setMental(Math.max(1,career.getMental() - (random.nextInt(2) + 1)));
+                        career.setVision(Math.max(1,career.getVision() - (random.nextInt(2) + 1)));
                     }
 
                 if(career.getHasPhysio()){

@@ -31,7 +31,7 @@ public class ShopService {
         fisio.setId("fisio");
         fisio.setName("Fisioterapeuta Privado");
         fisio.setDescription("Mejora el físico (+2) y reduice el riesgo de lesión");
-        fisio.setPrice(400000);
+        fisio.setPrice(250000);
         fisio.setActive(career.getHasPhysio());
 
         ShopItem nutritionist = new ShopItem();
@@ -39,7 +39,7 @@ public class ShopService {
         nutritionist.setId("nutricionista");
         nutritionist.setName("Nutricionista Personal");
         nutritionist.setDescription("Mejora el físico (+1) y la agilidad del jugador (velocidad +1)");
-        nutritionist.setPrice(470000);
+        nutritionist.setPrice(310000);
         nutritionist.setActive(career.getHasNutritionist());
 
         ShopItem psychologist = new ShopItem();
@@ -47,7 +47,7 @@ public class ShopService {
         psychologist.setId("psicologo");
         psychologist.setName("Psicólogo Personal");
         psychologist.setDescription("Mejora la mentalidad del jugador (+2) y la clarividencia en el juego (visión +2) reduciendo las malas rachas");
-        psychologist.setPrice(490000);
+        psychologist.setPrice(360000);
         psychologist.setActive(career.getHasPsychology());
 
         ShopItem trainer = new ShopItem();
@@ -55,7 +55,7 @@ public class ShopService {
         trainer.setId("entrenador");
         trainer.setName("Entrenador Personal");
         trainer.setDescription("Mejora la técnica (+2) y la finalización de jugadas (+1)");
-        trainer.setPrice(600000);
+        trainer.setPrice(400000);
         trainer.setActive(career.getHasTrainer());
 
 
@@ -64,7 +64,7 @@ public class ShopService {
         boots.setId("botas");
         boots.setName("Botas Premium");
         boots.setDescription("Mejora la velocidad de movimiento (+2) y la finalización de jugadas (+1)");
-        boots.setPrice(410000);
+        boots.setPrice(270000);
         boots.setActive(career.getHasBootsPremium());
 
         ShopItem imageAgent = new ShopItem();
@@ -72,7 +72,7 @@ public class ShopService {
         imageAgent.setId("asesor");
         imageAgent.setName("Asesor de imagen");
         imageAgent.setDescription("Mejora la reputación general del jugador (+3) y su relaciión con la prensa (+2)");
-        imageAgent.setPrice(480000);
+        imageAgent.setPrice(340000);
         imageAgent.setActive(career.getHasImageAgent());
 
         ShopItem videoAnalist = new ShopItem();
@@ -80,7 +80,7 @@ public class ShopService {
         videoAnalist.setId("analista");
         videoAnalist.setName("Analista de juego");
         videoAnalist.setDescription("Mejora el entendimiento del juego y la vision del jugador sobre el terreno de juego (+3)");
-        videoAnalist.setPrice(475000);
+        videoAnalist.setPrice(330000);
         videoAnalist.setActive(career.getHasVideoAnalyst());
 
         ShopItem chef = new ShopItem();
@@ -88,7 +88,7 @@ public class ShopService {
         chef.setId("chef");
         chef.setName("Chef Personal");
         chef.setDescription("Mejora el físico (+1), la velocidad (+1) y forma del jugador y su confianza mental (+1)");
-        chef.setPrice(450000);
+        chef.setPrice(300000);
         chef.setActive(career.getHasPrivateChef());
 
 
@@ -118,21 +118,21 @@ public class ShopService {
         int itemPrice= 0;
 
         switch (itemId){
-            case "fisio": itemPrice = 400000;
+            case "fisio": itemPrice = 250000;
                 break;
-            case "nutricionista": itemPrice = 470000;
+            case "nutricionista": itemPrice = 310000;
                 break;
-            case "psicologo": itemPrice = 490000;
+            case "psicologo": itemPrice = 360000;
                 break;
-            case "entrenador": itemPrice = 600000;
+            case "entrenador": itemPrice = 400000;
                 break;
-            case "botas": itemPrice = 410000;
+            case "botas": itemPrice = 270000;
                 break;
-            case "asesor": itemPrice = 480000;
+            case "asesor": itemPrice = 340000;
                 break;
-            case "analista": itemPrice = 475000;
+            case "analista": itemPrice = 330000;
                 break;
-            case "chef": itemPrice = 450000;
+            case "chef": itemPrice = 300000;
                 break;
             default: throw new RuntimeException("item no identificado");
         }

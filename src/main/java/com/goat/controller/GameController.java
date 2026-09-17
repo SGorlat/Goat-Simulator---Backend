@@ -73,6 +73,14 @@ public Career acceptOffert(@PathVariable Long id, @RequestBody TransferOffer off
         return transferService.acceptOffer(id,offer);
 }
 
+// GET - Oferta renovacion de tu club
+@GetMapping("renewal/{id}")
+public TransferOffer generateRenewal(@PathVariable Long id){
+        return transferService.generateRenewal(id);
+}
+
+//
+
 // GET - Obtener la lista de item para la tienda
 @GetMapping("/shop/{id}")
 public List<ShopItem> getItems(@PathVariable Long id){

@@ -4019,6 +4019,21 @@ public class DataInitializer implements CommandLineRunner {
                     0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
                     "interes_liga:Eredivisie");
 
+            // MINIJUEGO — Penalti en el minuto 90
+            Event mg001 = footballDataService.createEvent(
+                    "¡Penalti!",
+                    "Minuto 88. Entrada en el área y el árbitro señala el punto de penalti. El estadio enmudece. Tu entrenador te mira desde el banquillo. Tus compañeros se apartan. El balón es tuyo. Todo el mundo te está mirando.",
+                    "deportivo", "decision", "uncommon", "profesional", 16, 38, 1, 3, null, "penalty"
+            );
+            footballDataService.createOption(mg001,
+                    "¡Gol!",
+                    "El balón golpea la red. El estadio explota. Tus compañeros corren hacia ti. Has demostrado que los momentos grandes no te quedan grandes.",
+                    0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 0, 0);
+            footballDataService.createOption(mg001,
+                    "Parado",
+                    "El portero adivina tu intención. La pelota rebota en sus guantes. Te quedas clavado en el punto de penalti mientras el estadio suspira. Los penaltis fallados no se olvidan.",
+                    0, 0, 0, 0, -2, 0, -1, 0, 0, 0, -1, 0, 0, 0);
+
         }
 }
 
