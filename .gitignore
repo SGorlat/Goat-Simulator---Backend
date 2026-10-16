@@ -8,7 +8,7 @@ target/
 .apt_generated
 .classpath
 .factorypath
-.project
+.projectA
 .settings
 .springBeans
 .sts4-cache
@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ## application.properties
-src/main/resources/application.properties
+## src/main/resources/application.properties
