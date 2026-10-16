@@ -60,9 +60,11 @@ public class Career {
     private Integer agentRelation = 50;      // representante
     private Integer boardRelation = 50;      // directiva
 
-    // Flags/careerHistory — memoria del juego para decisiones (JSON como String)
-//    @Column(columnDefinition = "TEXT")
-//    private String careerHistory = "{}";
+    // COPA
+    private Integer cupRound = 0; // 0=no empezada, 1=octavos, 2=cuartos, 3=semis, 4=final, 5=ganada
+    private Boolean cupEliminated = false; // ¿eliminado?
+    private String cupResult; // Texto para el resultado en copa ha mostrar a final de temporada
+
 
     @ManyToOne
     @JoinColumn(name = "position_id", nullable = false)
@@ -94,6 +96,9 @@ public class Career {
     private Integer contractYearsLeft = 0;
 
     private int preseasonStep = 0; // 0=no empezada, 1=vacaciones hecha, 2=preparación hecha, 3=completa
+
+
+
 
     private LocalDateTime createdAt;
 

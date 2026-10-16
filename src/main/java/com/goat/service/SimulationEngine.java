@@ -355,6 +355,10 @@ public class SimulationEngine {
                 awards.add("¡Campeón de " + career.getCurrentTeam().getLeague().getName() + "!");
             }
 
+            if(career.getCupResult() != null){
+                awards.add(career.getCupResult());
+            }
+
             // Crecimiento automático del jugador según su growthMultiplier
                     int playerGrowth = (int)(3 * career.getGrowthMultiplier());
                     career.setSpeed(career.getSpeed() + playerGrowth);
@@ -423,7 +427,9 @@ public class SimulationEngine {
             // reseteamos los pasos de pretemporada a 0(0 = vacaciones)
             career.setPreseasonStep(0);
             career.clearFlags(); // reseteamos las flags, marcas de intereses de equipos ocurridas duirante la temporada
-
+            career.setCupRound(0); // reseteamos ronda copa para siguiente temp
+            career.setCupEliminated(false); // reseteamos eliminacion
+            career.setCupResult(null); // reseteamos texto de resultado a null
 
             // Tope de stats a 99 si supera ese rango
             career.setSpeed(Math.min(99, career.getSpeed()));
