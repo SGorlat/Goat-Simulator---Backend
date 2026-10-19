@@ -13,7 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**") // aplica CORS a todas las rutas que empiecen por /api/
-                        .allowedOrigins("http://localhost:3000", "http://localhost:5173", "http://localhost:5174") // url front vite/npm
+                        .allowedOrigins("http://localhost:3000", "http://localhost:5173", "http://localhost:5174","https://thegoatfootball.netlify.app") // url front vite/npm
                         .allowedMethods("GET", "POST", "PUT", "DELETE") // verbos HTTP acepta
                         .allowedHeaders("*"); // acepta todas las cabeceras
             }
