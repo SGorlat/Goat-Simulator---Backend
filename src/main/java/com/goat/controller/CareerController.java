@@ -37,5 +37,9 @@ public class CareerController {
     }
 
 
+    @GetMapping("/health")
+    public String upBackend(){
+        return "OK";
+    }
 
 }
